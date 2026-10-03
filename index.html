@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap"
+      rel="stylesheet"
+    />
+    <title>食光导航 | 美食灵感整理站</title>
+    <meta
+      name="description"
+      content="食光导航：樱花粉动漫贴纸风的美食灵感整理站，聚合家常菜谱、烘焙甜点、外卖到家、茶饮咖啡与生鲜食材好站。"
+    />
+    <meta name="theme-color" content="#fff3f6" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="食光导航 | 美食灵感整理站" />
+    <meta
+      property="og:description"
+      content="樱花粉动漫贴纸风的美食灵感整理站，收藏那些让人心动的味道。"
+    />
+    <meta property="og:locale" content="zh_CN" />
+    <script>
+      // 首屏前恢复主题，避免亮暗切换闪烁；
+      // 用户从未手动选择时，跟随系统 prefers-color-scheme
+      try {
+        var savedTheme = localStorage.getItem('food-nav:theme')
+        if (
+          savedTheme === 'dark' ||
+          (!savedTheme &&
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+          document.documentElement.classList.add('dark')
+        }
+      } catch (error) {
+        /* 隐私模式忽略 */
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

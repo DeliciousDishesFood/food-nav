@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="水果篮子插画">
+  <defs>
+    <linearGradient id="fruit-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEAF6"/>
+      <stop offset="100%" stop-color="#E8F7E4"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#fruit-bg)"/>
+  <circle cx="68" cy="68" r="36" fill="#FFFFFF" opacity="0.65"/>
+  <circle cx="338" cy="236" r="48" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M60 168l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#9ED8F5"/>
+  <path d="M336 92l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <ellipse cx="200" cy="246" rx="118" ry="16" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M140 176h120l14 58a22 22 0 0 1-22 22H148a22 22 0 0 1-22-22z" fill="#FFD79B" stroke="#E8A24D" stroke-width="4"/>
+  <path d="M140 176h120l-6 16H146z" fill="#E8A24D"/>
+  <path d="M176 122a52 40 0 0 1 48 0 26 30 0 0 1-48 0z" fill="#FF6B9D"/>
+  <path d="M200 118c-4-14 6-26 18-28 4 12-2 22-18 28z" fill="#7BDCC0"/>
+  <circle cx="248" cy="138" r="22" fill="#FFC94D"/>
+  <circle cx="252" cy="134" r="6" fill="#FFE9C4"/>
+  <path d="M250 118l8-14 8 14z" fill="#7BDCC0"/>
+  <circle cx="228" cy="104" r="14" fill="#9ED8F5"/>
+  <circle cx="230" cy="101" r="4" fill="#FFFFFF" opacity="0.8"/>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M186 156c4 5 12 5 16 0"/>
+    <path d="M214 156c4 5 12 5 16 0"/>
+  </g>
+  <ellipse cx="200" cy="250" rx="104" ry="12" fill="#E8A24D" opacity="0.2"/>
+</svg>

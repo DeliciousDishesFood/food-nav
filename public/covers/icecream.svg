@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="冰淇淋甜筒插画">
+  <defs>
+    <linearGradient id="ice-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEAF6"/>
+      <stop offset="100%" stop-color="#E3F4FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#ice-bg)"/>
+  <circle cx="68" cy="68" r="36" fill="#FFFFFF" opacity="0.65"/>
+  <circle cx="338" cy="236" r="48" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M60 176l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <path d="M336 90l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#9ED8F5"/>
+  <ellipse cx="200" cy="244" rx="112" ry="18" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M176 236l24-92 24 92z" fill="#FFD79B"/>
+  <path d="M180 236l20-84 20 84z" fill="#FFE9C4"/>
+  <g stroke="#E8A24D" stroke-width="3" stroke-linecap="round">
+    <path d="M181 214h38"/>
+    <path d="M186 196h28"/>
+    <path d="M191 178h18"/>
+  </g>
+  <circle cx="160" cy="128" r="42" fill="#FF8FB8"/>
+  <circle cx="240" cy="128" r="42" fill="#7BDCC0"/>
+  <circle cx="166" cy="122" r="10" fill="#FFE1EC" opacity="0.7"/>
+  <circle cx="234" cy="122" r="10" fill="#FFFFFF" opacity="0.7"/>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M178 92c4 5 12 5 16 0"/>
+    <path d="M222 92c4 5 12 5 16 0"/>
+  </g>
+  <path d="M238 74c-2-12 4-22 14-26 6 10 4 20-14 26z" fill="#FF6B9D"/>
+  <path d="M230 70l6-12 6 12z" fill="#7BDCC0"/>
+</svg>

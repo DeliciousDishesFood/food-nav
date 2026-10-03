@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="薯条快餐插画">
+  <defs>
+    <linearGradient id="fries-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEAF6"/>
+      <stop offset="100%" stop-color="#FFF3DE"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#fries-bg)"/>
+  <circle cx="68" cy="68" r="36" fill="#FFFFFF" opacity="0.65"/>
+  <circle cx="338" cy="236" r="48" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M60 170l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#9ED8F5"/>
+  <path d="M336 92l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <ellipse cx="200" cy="242" rx="116" ry="16" fill="#FFFFFF" opacity="0.9"/>
+  <g stroke="#FFC94D" stroke-width="16" stroke-linecap="round">
+    <path d="M168 148l-14 44"/>
+    <path d="M200 138l-6 54"/>
+    <path d="M232 148l6 44"/>
+  </g>
+  <path d="M140 196h120l-12 34a18 18 0 0 1-18 14h-60a18 18 0 0 1-18-14z" fill="#FF6B9D"/>
+  <path d="M140 196h120l-4 10H144z" fill="#FF8FB8"/>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M180 214c4 5 12 5 16 0"/>
+    <path d="M204 214c4 5 12 5 16 0"/>
+  </g>
+  <ellipse cx="200" cy="248" rx="104" ry="12" fill="#FF8FB8" opacity="0.15"/>
+</svg>

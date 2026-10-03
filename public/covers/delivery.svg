@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="外卖配送插画">
+  <defs>
+    <linearGradient id="delivery-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEAF6"/>
+      <stop offset="100%" stop-color="#E3F4FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#delivery-bg)"/>
+  <circle cx="68" cy="68" r="36" fill="#FFFFFF" opacity="0.65"/>
+  <circle cx="338" cy="236" r="48" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M60 170l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <path d="M336 92l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#9ED8F5"/>
+  <ellipse cx="200" cy="238" rx="132" ry="16" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M112 132h176v74a16 16 0 0 1-16 16H128a16 16 0 0 1-16-16z" fill="#FF8FB8"/>
+  <rect x="132" y="150" width="136" height="46" rx="12" fill="#FFE1EC"/>
+  <rect x="148" y="162" width="44" height="22" rx="6" fill="#FFFFFF"/>
+  <rect x="206" y="162" width="44" height="22" rx="6" fill="#FFFFFF"/>
+  <path d="M150 150l30 8-30 8z" fill="#7BDCC0"/>
+  <path d="M222 118h36l10 32h-46z" fill="#FFC94D"/>
+  <path d="M258 118c8-2 12 2 10 10h-14z" fill="#FFD79B"/>
+  <circle cx="150" cy="222" r="18" fill="#4B3A55"/>
+  <circle cx="150" cy="222" r="8" fill="#FFFFFF" opacity="0.85"/>
+  <circle cx="250" cy="222" r="18" fill="#4B3A55"/>
+  <circle cx="250" cy="222" r="8" fill="#FFFFFF" opacity="0.85"/>
+  <path d="M152 218l10-16" fill="none" stroke="#4B3A55" stroke-width="5" stroke-linecap="round"/>
+  <path d="M248 218l10-16" fill="none" stroke="#4B3A55" stroke-width="5" stroke-linecap="round"/>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M186 178c4 5 12 5 16 0"/>
+    <path d="M206 178c4 5 12 5 16 0"/>
+  </g>
+  <ellipse cx="200" cy="248" rx="120" ry="12" fill="#FF8FB8" opacity="0.15"/>
+</svg>

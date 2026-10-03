@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="生鲜果蔬插画">
+  <defs>
+    <linearGradient id="market-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E4FBF2"/>
+      <stop offset="100%" stop-color="#FFEAF3"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#market-bg)"/>
+  <circle cx="330" cy="66" r="38" fill="#FFFFFF" opacity="0.65"/>
+  <circle cx="64" cy="242" r="44" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M336 168l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <path d="M104 150h192l-18 88a26 26 0 0 1-26 22H148a26 26 0 0 1-26-22z" fill="#FFB88C" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M96 144h208a10 10 0 0 1 0 20H96a10 10 0 0 1 0-20z" fill="#FFD1AE" stroke="#FFFFFF" stroke-width="4"/>
+  <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.8" fill="none">
+    <path d="M132 176h136"/>
+    <path d="M138 204h124"/>
+  </g>
+  <g>
+    <path d="M168 146c-6-34 14-56 40-56s42 24 34 56z" fill="#FF9A6B" stroke="#FFFFFF" stroke-width="4"/>
+    <path d="M206 92c-12-16-4-30 8-36-2 16 6 26 14 32z" fill="#7BDCC0"/>
+    <path d="M204 96c4-18 20-26 34-24-10 12-16 20-18 30z" fill="#9EEBCF"/>
+    <path d="M148 148c-18-6-26-24-20-42 16 6 30 20 32 42z" fill="#7BDCC0"/>
+    <ellipse cx="262" cy="126" rx="30" ry="24" fill="#FF6B9D" stroke="#FFFFFF" stroke-width="4"/>
+    <path d="M262 104c-4-12 4-20 16-22-6 10-4 16-2 22z" fill="#7BDCC0"/>
+  </g>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M252 130c3 4 9 4 12 0"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.75">
+    <circle cx="252" cy="118" r="5"/>
+    <circle cx="272" cy="134" r="4"/>
+  </g>
+</svg>

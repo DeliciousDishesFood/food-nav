@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  /* ============ 主题变量：樱花粉亮色（默认） ============ */
+  :root {
+    color-scheme: light;
+
+    --food-bg: #fff3f6;
+    --food-primary: #ff6b9d;
+    --food-sky: #6fc3f7;
+    --food-mint: #7bdcc0;
+    --food-sun: #ffc94d;
+    --food-dark: #4b3a55;
+    --food-text: #6e5f7b;
+    --food-muted: #a99bbb;
+    --food-card-border: #ffd9e6;
+    --food-tag-bg: #fff0f5;
+    --food-surface: #ffffff;
+    --food-surface-2: #fff7fa;
+    --food-surface-3: #ffe7f0;
+    --food-line: #ffffff;
+    --food-accent-soft: #ffd9e6;
+    --food-ring: #ffe7f0;
+    --food-soft: #ffe9f1;
+
+    --shadow-card: 4px 4px 0 #ffe1ec, 0 12px 24px rgba(75, 58, 85, 0.08);
+    --shadow-card-hover: 8px 10px 0 #ffc9dc, 0 20px 32px rgba(255, 107, 157, 0.22);
+    --shadow-header: 0 6px 0 #ffe1ec, 0 16px 30px rgba(75, 58, 85, 0.1);
+    --shadow-sticker: 3px 3px 0 #ffdce9;
+    --shadow-focus: 0 0 0 4px rgba(255, 107, 157, 0.18);
+    --shadow-tab: 3px 3px 0 #d94e7f;
+    --shadow-tag: 2px 2px 0 rgba(217, 78, 127, 0.35);
+  }
+
+  /* ============ 主题变量：暗系紫黑贴纸 ============ */
+  html.dark {
+    color-scheme: dark;
+
+    --food-bg: #16101f;
+    --food-primary: #ff8fb8;
+    --food-sky: #7fd0ff;
+    --food-mint: #8ce6cd;
+    --food-sun: #ffd873;
+    --food-dark: #f6edfd;
+    --food-text: #cec1e4;
+    --food-muted: #9c8ab8;
+    --food-card-border: #3e2f55;
+    --food-tag-bg: #2c2140;
+    --food-surface: #241a33;
+    --food-surface-2: #2a2040;
+    --food-surface-3: #33254a;
+    --food-line: #3e2f55;
+    --food-accent-soft: #4a3560;
+    --food-ring: #3a2b4d;
+    --food-soft: #2f2346;
+
+    --shadow-card: 4px 4px 0 #3a2b4d, 0 12px 24px rgba(0, 0, 0, 0.45);
+    --shadow-card-hover: 8px 10px 0 #4b3766, 0 20px 32px rgba(0, 0, 0, 0.5);
+    --shadow-header: 0 6px 0 #3a2b4d, 0 16px 30px rgba(0, 0, 0, 0.45);
+    --shadow-sticker: 3px 3px 0 #100a18;
+    --shadow-focus: 0 0 0 4px rgba(255, 143, 184, 0.25);
+    --shadow-tab: 3px 3px 0 #100a18;
+    --shadow-tag: 2px 2px 0 rgba(0, 0, 0, 0.45);
+  }
+
+  /* 永久预留垂直滚动条占位，切换分类 Tab 时页面不横向抖动 */
+  html {
+    overflow-y: scroll;
+    /* Firefox 兼容：细滚动条 + 樱花粉配色 */
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6cd #fef2f7;
+  }
+
+  html.dark {
+    scrollbar-color: #7a5c9e #221a2e;
+  }
+
+  /* WebKit 滚动条：8px 全圆角，樱花粉轨道 + 柔和粉滑块 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fef2f7;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ffb6cd;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff8fb1;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: #fef2f7;
+  }
+
+  /* 暗色 WebKit 滚动条：必须同时命中 html 自身（根滚动条）与内部滚动容器 */
+  html.dark::-webkit-scrollbar-track,
+  html.dark ::-webkit-scrollbar-track {
+    background: #221a2e;
+  }
+
+  html.dark::-webkit-scrollbar-thumb,
+  html.dark ::-webkit-scrollbar-thumb {
+    background: #7a5c9e;
+  }
+
+  html.dark::-webkit-scrollbar-thumb:hover,
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #9b7dc4;
+  }
+
+  html.dark::-webkit-scrollbar-corner,
+  html.dark ::-webkit-scrollbar-corner {
+    background: #221a2e;
+  }
+
+  /* 动漫风樱花奶油底：三段柔和光斑 */
+  body {
+    @apply text-food-text;
+    margin: 0;
+    font-family: theme('fontFamily.sans');
+    background-color: var(--food-bg);
+    background-image:
+      radial-gradient(
+        1100px 560px at 8% -8%,
+        rgba(255, 176, 208, 0.55),
+        transparent 62%
+      ),
+      radial-gradient(
+        900px 520px at 96% 4%,
+        rgba(158, 216, 255, 0.5),
+        transparent 60%
+      ),
+      radial-gradient(
+        1000px 700px at 50% 112%,
+        rgba(255, 222, 160, 0.4),
+        transparent 62%
+      );
+    background-attachment: fixed;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6cd #fef2f7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* 暗色：光斑降饱和 + 紫粉氛围 */
+  html.dark body {
+    background-color: var(--food-bg);
+    background-image:
+      radial-gradient(
+        1100px 560px at 8% -8%,
+        rgba(255, 107, 157, 0.16),
+        transparent 62%
+      ),
+      radial-gradient(
+        900px 520px at 96% 4%,
+        rgba(124, 92, 255, 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        1000px 700px at 50% 112%,
+        rgba(255, 201, 77, 0.1),
+        transparent 62%
+      );
+    scrollbar-color: #7a5c9e #221a2e;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: #ffd9e6;
+    color: #4b3a55;
+  }
+
+  html.dark ::selection {
+    background: #4a3560;
+    color: #f6edfd;
+  }
+}
+
+@layer components {
+  /* 贴纸感卡片：白底 + 粉描边 + 硬偏移阴影（暗色由变量切换）
+     isolation: isolate 建立稳定 stacking context，把卡片内 z-20 的
+     爱心/复制按钮锁在本卡片内，避免逃逸后与 sticky Header 的 z-20
+     同级竞争（hover transform 会使层级骤降，造成抖动、无法点击） */
+  .food-card {
+    @apply relative overflow-hidden rounded-3xl border-2 border-food-line bg-food-surface;
+    isolation: isolate;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    color: var(--food-text);
+  }
+
+  /* hover：柔和小角度旋转 + 轻微放大，保留硬偏移阴影 */
+  .food-card:hover {
+    transform: rotate(-3deg) scale(1.02);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 系统开启「减少动态效果」时，停用无限循环装饰动画（花瓣 / 星星 / 空态浮动） */
+@media (prefers-reduced-motion: reduce) {
+  .animate-petal-fall,
+  .animate-twinkle,
+  .animate-bob {
+    animation: none;
+  }
+}
+
+/* 搜索框：隐藏 WebKit 原生搜索清除钮，统一使用自定义清空按钮（避免双 ✕） */
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
