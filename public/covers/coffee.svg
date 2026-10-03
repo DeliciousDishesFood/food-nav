@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="咖啡插画">
+  <defs>
+    <linearGradient id="coffee-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8F6FF"/>
+      <stop offset="100%" stop-color="#FFE7F0"/>
+    </linearGradient>
+    <linearGradient id="coffee-cup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFF0F5"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#coffee-bg)"/>
+  <circle cx="330" cy="70" r="40" fill="#FF8FB8" opacity="0.2"/>
+  <circle cx="66" cy="236" r="46" fill="#FFFFFF" opacity="0.6"/>
+  <path d="M334 176l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <g fill="none" stroke="#9ED8F5" stroke-width="7" stroke-linecap="round">
+    <path d="M176 86c16-18-14-34 2-52"/>
+    <path d="M214 78c16-18-14-34 2-52"/>
+  </g>
+  <path d="M130 132h140v58a46 46 0 0 1-46 46h-48a46 46 0 0 1-46-46z" fill="url(#coffee-cup)" stroke="#FF6B9D" stroke-width="5"/>
+  <path d="M270 148h24a28 28 0 0 1 0 56h-24" fill="none" stroke="#FF6B9D" stroke-width="12"/>
+  <ellipse cx="200" cy="132" rx="70" ry="18" fill="#FFFFFF" stroke="#FF6B9D" stroke-width="5"/>
+  <ellipse cx="200" cy="132" rx="56" ry="13" fill="#C98A6B"/>
+  <ellipse cx="188" cy="128" rx="24" ry="6" fill="#E8B79A" opacity="0.9"/>
+  <ellipse cx="200" cy="244" rx="98" ry="16" fill="#FFFFFF" opacity="0.9"/>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M172 186c4 5 12 5 16 0"/>
+    <path d="M212 186c4 5 12 5 16 0"/>
+  </g>
+  <g fill="#FFD1E1" opacity="0.9">
+    <ellipse cx="164" cy="200" rx="10" ry="5"/>
+    <ellipse cx="236" cy="200" rx="10" ry="5"/>
+  </g>
+  <g fill="#FF8FB8">
+    <ellipse cx="318" cy="212" rx="15" ry="11" transform="rotate(-24 318 212)"/>
+    <ellipse cx="346" cy="230" rx="15" ry="11" transform="rotate(-24 346 230)"/>
+  </g>
+</svg>

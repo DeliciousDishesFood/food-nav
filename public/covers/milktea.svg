@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="奶茶插画">
+  <defs>
+    <linearGradient id="tea-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEAF6"/>
+      <stop offset="100%" stop-color="#FFEFDE"/>
+    </linearGradient>
+    <linearGradient id="tea-cup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE1EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#tea-bg)"/>
+  <circle cx="68" cy="68" r="36" fill="#FFFFFF" opacity="0.65"/>
+  <circle cx="338" cy="236" r="48" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M60 170l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#9ED8F5"/>
+  <path d="M336 92l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FFC94D"/>
+  <ellipse cx="200" cy="244" rx="112" ry="18" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M148 132h104l12 96a24 24 0 0 1-24 24h-80a24 24 0 0 1-24-24z" fill="url(#tea-cup)" stroke="#FF8FB8" stroke-width="5"/>
+  <path d="M148 148h104l-4 28H152z" fill="#FFE1EC"/>
+  <g fill="#6E5F7B" opacity="0.85">
+    <circle cx="172" cy="224" r="6"/>
+    <circle cx="196" cy="232" r="6"/>
+    <circle cx="220" cy="224" r="6"/>
+    <circle cx="206" cy="210" r="6"/>
+    <circle cx="182" cy="206" r="6"/>
+  </g>
+  <path d="M188 96h36a14 14 0 0 1 14 14v18" fill="none" stroke="#FF6B9D" stroke-width="10" stroke-linecap="round"/>
+  <rect x="232" y="116" width="26" height="16" rx="8" fill="#FFC94D" transform="rotate(34 245 124)"/>
+  <g stroke="#4B3A55" stroke-width="4" stroke-linecap="round">
+    <path d="M180 176c4 5 12 5 16 0"/>
+    <path d="M204 176c4 5 12 5 16 0"/>
+  </g>
+  <ellipse cx="200" cy="248" rx="100" ry="12" fill="#FF8FB8" opacity="0.15"/>
+</svg>

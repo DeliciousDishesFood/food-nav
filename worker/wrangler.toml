@@ -1,0 +1,10 @@
+# 食光导航 · 一言 CORS 代理
+# 部署：npx wrangler deploy   （在 worker/ 目录下执行）
+# 部署完成后把地址填进构建环境：
+#   VITE_QUOTE_PROXY=https://food-nav-quote-proxy.<account>.workers.dev npm run build
+name = "food-nav-quote-proxy"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[observability]
+enabled = true

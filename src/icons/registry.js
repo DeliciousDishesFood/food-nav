@@ -1,0 +1,81 @@
+import {
+  Bike,
+  Cake,
+  Carrot,
+  ChefHat,
+  Coffee,
+  Cookie,
+  CookingPot,
+  Copy,
+  Croissant,
+  Cupcake,
+  CupSoda,
+  FishSymbol,
+  Flame,
+  GlassWater,
+  Hamburger,
+  Heart,
+  IceCreamBowl,
+  IceCreamCone,
+  LeafyGreen,
+  Milk,
+  Moon,
+  Sandwich,
+  Search,
+  SearchX,
+  Soup,
+  Sparkles,
+  Star,
+  Sun,
+  Truck,
+  Utensils,
+  UtensilsCrossed,
+  Wheat,
+} from 'lucide'
+
+/**
+ * 数据源 icon 字段（kebab-case）→ lucide IconNode（morphicons 的图标数据格式）
+ */
+export const iconRegistry = {
+  'cooking-pot': CookingPot,
+  'utensils-crossed': UtensilsCrossed,
+  soup: Soup,
+  'chef-hat': ChefHat,
+  sparkles: Sparkles,
+  croissant: Croissant,
+  cake: Cake,
+  cupcake: Cupcake,
+  cookie: Cookie,
+  'ice-cream-bowl': IceCreamBowl,
+  bike: Bike,
+  truck: Truck,
+  hamburger: Hamburger,
+  sandwich: Sandwich,
+  coffee: Coffee,
+  'cup-soda': CupSoda,
+  'glass-water': GlassWater,
+  milk: Milk,
+  'ice-cream-cone': IceCreamCone,
+  carrot: Carrot,
+  'leafy-green': LeafyGreen,
+  'fish-symbol': FishSymbol,
+  wheat: Wheat,
+  heart: Heart,
+}
+
+export function getIconNode(name) {
+  return iconRegistry[name] ?? Utensils
+}
+
+export {
+  Copy,
+  Flame,
+  Heart,
+  Moon,
+  Search,
+  SearchX,
+  Sparkles,
+  Star,
+  Sun,
+  Utensils,
+}
