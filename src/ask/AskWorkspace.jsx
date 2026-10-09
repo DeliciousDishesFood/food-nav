@@ -1,16 +1,15 @@
 /**
- * M8 · AI 页工作台（空态，新建文件）
+ * M8/M10 · AI 页工作台（空态）
  * AskPage 在 messages.length === 0 时渲染本组件；发出第一条消息后整块卸载，
- * 切换为纯净单栏 AskChat（桌面 3 列 → 单列，aside 已彻底移除）。
- * 布局：桌面 lg:grid-cols-3 —— 左大卡（插画/标题/问候/灵感 chips，col-span-2）
- *      + 右列（今日美味 + 最近会话，col-span-1）；移动端单列堆叠、外层可滚动。
- * 零耦合：不 import 任何主站组件；chips / 今日美味数据取静态快照（禁新接口）。
- * M10：最近会话面板多条化（最多 10 条）+ 每条 Trash2 单条删除（aria-label=删除会话）；
- *     「当前会话」不可从面板删除（用 header「清空对话」），避免内存/存储状态错乱。
+ * 切换为纯净单栏 AskChat。
+ * task-23 极简化：删掉「今日美味」「最近会话」两个静态面板（判定鸡肋），
+ *  3 列 grid → 单列垂直居中：插画 + 品牌问候 + 大输入框（children 注入 AskComposer）
+ *  + 灵感 chips（换一批保留）；
+ *  最近会话收进 header History 图标浮层（见 AskHistoryMenu.jsx，可恢复可单删）。
+ * 零耦合：不 import 任何主站组件；chips 文案取静态快照（禁新接口）。
  */
-import { useEffect, useMemo, useState } from 'react'
-import { CATEGORY_EMOJI, pickChips, pickDailySites, pickGreeting } from './askCopy.js'
-import { ASK_HISTORY_KEY, readSessions } from './askHistory.js'
+import { useState } from 'react'
+import { pickChips, pickGreeting } from './askCopy.js'
 
 /** 樱见品牌小 logo：渐变底圆角方块 + 白色樱花五瓣（header 与工作台共用） */
 export function SakuraLogo({ className = 'h-6 w-6' }) {
@@ -84,130 +83,9 @@ function AskIllustration() {
   )
 }
 
-/** 文案截断（最近会话摘要，最多 24 字） */
-function clip(text, max = 24) {
-  return text.length > max ? `${text.slice(0, max)}…` : text
-}
-
-/** 取会话里最后一条用户消息（列表摘要用） */
-function lastUserOf(messages) {
-  if (!Array.isArray(messages)) return ''
-  for (let i = messages.length - 1; i >= 0; i -= 1) {
-    const item = messages[i]
-    if (item && item.role === 'user' && item.content) return item.content
-  }
-  return ''
-}
-
-/** Trash2（lucide 风格，手绘 SVG：零新依赖） */
-function Trash2Icon({ className = 'h-4 w-4' }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 6h18" />
-      <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-      <path d="M10 11v6" />
-      <path d="M14 11v6" />
-    </svg>
-  )
-}
-
-/**
- * 最近会话面板（M10 多条化）：
- *  每条 = 摘要（可点击恢复该会话）+ Trash2 单条删除；删空 → 轻引导；
- *  「当前会话」行只读不可删（提示走 header 清空），避免删掉正在展示的对话。
- */
-function RecentSession({ onResume, activeSessionId, onRemoveSession }) {
-  const [sessions, setSessions] = useState(() => readSessions())
-
-  // 跨标签写入/清除历史时同步（storage 事件只在其他文档触发，本页不受自写干扰）
-  useEffect(() => {
-    const onStorage = (event) => {
-      if (!event.key || event.key === ASK_HISTORY_KEY) setSessions(readSessions())
-    }
-    window.addEventListener('storage', onStorage)
-    return () => window.removeEventListener('storage', onStorage)
-  }, [])
-
-  // 单条删除：AskPage 落盘后重读，面板即时更新（本页写入不触发 storage 事件）
-  const handleRemove = (id) => {
-    onRemoveSession(id)
-    setSessions(readSessions())
-  }
-
-  return (
-    <div className="ask-panel ask-soft rounded-[22px] p-3.5">
-      <p className="mb-2 font-rounded text-control font-bold text-food-dark">最近会话</p>
-      {sessions.length > 0 ? (
-        <ul className="flex flex-col gap-2">
-          {sessions.map((session) => {
-            const isActive = activeSessionId !== null && session.id === activeSessionId
-            const summary = clip(lastUserOf(session.messages)) || '（空对话）'
-            return (
-              <li
-                key={session.id}
-                className="flex items-center gap-1.5 rounded-2xl border border-white/70 bg-white/60 px-2 py-1.5 dark:border-white/10 dark:bg-white/5"
-              >
-                <button
-                  type="button"
-                  onClick={() => onResume(session)}
-                  className="flex min-w-0 flex-1 flex-col items-start gap-0.5 rounded-xl px-1 py-0.5 text-left transition-colors hover:text-food-primary focus:outline-none focus-visible:shadow-foodFocus"
-                >
-                  <span className="flex w-full min-w-0 items-center gap-1.5">
-                    {isActive ? (
-                      <span className="shrink-0 rounded-full bg-food-tagBg px-1.5 py-px text-[10px] font-bold text-food-primary">
-                        当前
-                      </span>
-                    ) : null}
-                    <span className="min-w-0 truncate font-rounded text-xs font-medium text-food-dark">
-                      {summary}
-                    </span>
-                  </span>
-                  <span className="text-[11px] text-food-muted">继续对话 →</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleRemove(session.id)}
-                  disabled={isActive}
-                  aria-label="删除会话"
-                  aria-disabled={isActive}
-                  title={isActive ? '当前会话请用「清空对话」删除' : '删除会话'}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-food-muted transition-all duration-200 hover:bg-white/80 hover:text-food-primary focus:outline-none focus-visible:shadow-foodFocus disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-food-muted dark:hover:bg-white/10"
-                >
-                  <Trash2Icon />
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-      ) : (
-        <p className="font-rounded text-xs leading-relaxed text-food-muted">
-          聊聊今天想吃什么吧，问过的对话会在这里等你。
-        </p>
-      )}
-    </div>
-  )
-}
-
-export default function AskWorkspace({
-  onSuggest,
-  onPick,
-  onResume,
-  activeSessionId = null,
-  onRemoveSession = () => {},
-}) {
+export default function AskWorkspace({ onSuggest, children }) {
   const [chips, setChips] = useState(() => pickChips())
   const [greeting] = useState(() => pickGreeting())
-  const daily = useMemo(() => pickDailySites(3), [])
 
   /** 点击 chip：换一批 + 触发提问（与原空态语义一致） */
   const handleChip = (text) => {
@@ -216,9 +94,9 @@ export default function AskWorkspace({
   }
 
   return (
-    <div className="ask-scroll mx-auto grid min-h-0 w-full max-w-6xl flex-1 grid-cols-1 gap-4 overflow-y-auto overscroll-contain px-4 pb-4 pt-4 lg:grid-cols-3">
-      {/* 左大卡：插画 + 品牌 + 问候 + 灵感 chips */}
-      <div className="ask-panel ask-soft flex flex-col items-center justify-center rounded-[24px] p-6 text-center lg:col-span-2">
+    <div className="ask-scroll mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col items-center justify-center overflow-y-auto overscroll-contain px-4 py-6">
+      {/* 单列居中：插画 + 品牌 + 问候 + 输入框 + 灵感 chips */}
+      <div className="flex w-full max-w-xl flex-col items-center text-center">
         <div className="flex justify-center">
           <AskIllustration />
         </div>
@@ -230,6 +108,8 @@ export default function AskWorkspace({
           站内美食网站挖一挖，烘焙下厨的小问题也能问
         </p>
         <p className="mt-2 font-rounded text-control text-food-muted">{greeting}</p>
+        {/* 大输入框（AskComposer 由 AskPage 注入：插画 → 问候 → 输入框 → chips 一列居中） */}
+        {children}
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {chips.map((text) => (
             <button
@@ -249,52 +129,6 @@ export default function AskWorkspace({
         >
           ⟳ 换一批灵感
         </button>
-      </div>
-
-      {/* 右列：今日美味 + 最近会话 */}
-      <div className="flex min-h-0 flex-col gap-4 lg:col-span-1">
-        <div className="ask-panel ask-soft flex flex-1 flex-col rounded-[22px] p-3.5">
-          <p className="mb-2 font-rounded text-control font-bold text-food-dark">今日美味</p>
-          <ul className="flex flex-1 flex-col justify-center gap-0.5">
-            {daily.map((site) => (
-              <li key={`${site.id}-${site.url}`}>
-                <button
-                  type="button"
-                  onClick={() => onPick(site)}
-                  className="group flex w-full items-center gap-2.5 rounded-2xl px-2 py-1.5 text-left transition-colors hover:bg-white/70 focus:outline-none focus-visible:shadow-foodFocus dark:hover:bg-white/5"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-food-ring bg-food-tagBg text-base"
-                  >
-                    {CATEGORY_EMOJI[site.categoryKey] || '🍜'}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate font-rounded text-control font-medium text-food-dark">
-                      {site.name}
-                    </span>
-                    <span className="block truncate text-xs text-food-muted">
-                      {site.categoryName}
-                    </span>
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="text-food-muted transition-transform duration-200 group-hover:translate-x-0.5"
-                  >
-                    →
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-2 text-[11px] text-food-muted">点一下自动填进输入框</p>
-        </div>
-
-        <RecentSession
-          onResume={onResume}
-          activeSessionId={activeSessionId}
-          onRemoveSession={onRemoveSession}
-        />
       </div>
     </div>
   )

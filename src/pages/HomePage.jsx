@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Layout from '../components/Layout/Layout.jsx'
 import Header from '../components/Layout/Header.jsx'
+import DailyFortune from '../components/DailyFortune/DailyFortune.jsx'
 import Footer from '../components/Layout/Footer.jsx'
 import CategoryTabs from '../components/CategoryTabs.jsx'
 import NavGroup from '../components/NavCard/NavGroup.jsx'
@@ -57,6 +58,9 @@ export default function HomePage() {
   return (
     <Layout>
       <Header value={searchText} onChange={setSearchText} />
+
+      {/* task-23：今日签贴纸卡（打字机正下方；groups 为空时组件 render null） */}
+      <DailyFortune groups={groups} />
 
       {degraded && !snapshotNoticeDismissed ? (
         <div className="mt-4 flex items-center justify-between gap-3 rounded-2xl border-2 border-food-accent-soft bg-food-surface px-4 py-2.5 font-rounded text-control text-food-muted shadow-foodSticker">

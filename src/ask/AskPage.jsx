@@ -14,11 +14,15 @@
  *  - 对话态 header 新增「返回工作台」（flush 历史后回到工作台，会话保留不清空）
  *  - 会话多条化：bootSession 恢复最新一条、writeAskHistory 带 sessionId、工作台可单条删除
  *  - view 状态机（workspace | chat）：返回工作台 = 保留 messages 只切视图；清空/删除当前 = 归零
+ * task-23 变更（SSE / Abort / 推荐 / 发送链路零改动）：
+ *  - header 右格新增 History 图标浮层（AskHistoryMenu：恢复 / 单条删除最近会话）
+ *  - 工作台极简化：删今日美味/最近会话静态面板，单列居中（AskComposer 注入空态列，对话态仍在页底）
  */
 import { useEffect, useRef, useState } from 'react'
 import AskChat from './AskChat.jsx'
 import AskComposer from './AskComposer.jsx'
 import AskWorkspace, { SakuraLogo } from './AskWorkspace.jsx'
+import AskHistoryMenu from './AskHistoryMenu.jsx'
 import { readSessions, removeSession, writeAskHistory } from './askHistory.js'
 import '../styles/ask-theme.css'
 
@@ -335,13 +339,23 @@ export default function AskPage() {
     if (!streaming) send(text)
   }
 
-  const handlePick = (site) => {
-    setDraft(`看看「${site.name}」这类网站`)
-  }
+  // 输入框：空态 = 注入工作台单列（插画→问候→输入框→chips）；对话态 = 页底固定条
+  const composer = (
+    <AskComposer
+      value={draft}
+      onChange={setDraft}
+      onSend={send}
+      onStop={stop}
+      streaming={streaming}
+      disabled={false}
+    />
+  )
 
   return (
     <div className="ask-page flex h-[100dvh] min-h-[520px] flex-col">
-      <header className="shrink-0">
+      {/* relative z-50：header 胶囊自带 backdrop-blur（层叠上下文），History 浮层 z-50 需要
+          整个 header 高于对话区，否则浮层会被下方聊天气泡按 DOM 顺序盖住 */}
+      <header className="relative z-50 shrink-0">
         <div className="mx-auto w-full max-w-6xl px-4">
           {/* M8：三列 grid 真居中（左图标 / 中标题 / 右图标），悬浮胶囊容器原样保留 */}
           <div className="mt-3 grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-[20px] border border-white/85 bg-white/70 px-3 py-2 backdrop-blur-md dark:border-white/10 dark:bg-[#241A33]/75">
@@ -404,30 +418,38 @@ export default function AskPage() {
               </span>
             </div>
 
-            <button
-              type="button"
-              onClick={clear}
-              disabled={messages.length === 0 || streaming}
-              aria-label="清空对话"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/90 bg-white/80 text-food-muted shadow-[0_4px_14px_rgba(244,114,182,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:text-food-primary focus:outline-none focus-visible:shadow-foodFocus disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-white/10 dark:bg-[#2C2140]/85"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            {/* task-23：History 图标浮层（最近会话）+ 清空对话，成组放右格 */}
+            <div className="flex items-center justify-end gap-2">
+              <AskHistoryMenu
+                onResume={resume}
+                onRemoveSession={handleRemoveSession}
+                activeSessionId={messages.length > 0 ? activeSessionId : null}
+              />
+              <button
+                type="button"
+                onClick={clear}
+                disabled={messages.length === 0 || streaming}
+                aria-label="清空对话"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/90 bg-white/80 text-food-muted shadow-[0_4px_14px_rgba(244,114,182,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:text-food-primary focus:outline-none focus-visible:shadow-foodFocus disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-white/10 dark:bg-[#2C2140]/85"
               >
-                <path d="M3 6h18" />
-                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                <path d="M10 11v6" />
-                <path d="M14 11v6" />
-              </svg>
-            </button>
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 6h18" />
+                  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                  <path d="M10 11v6" />
+                  <path d="M14 11v6" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -435,31 +457,19 @@ export default function AskPage() {
       {/* M8：工作台 = 三列布局（移动端单列堆叠、可滚动）；对话态 = 纯净单栏 AskChat。
           M10：由 view 决定（返回工作台保留 messages，只切视图），messages 为空兜底回工作台 */}
       {view === 'chat' && messages.length > 0 ? (
-        <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 px-4 pt-4">
-          <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
-            <AskChat messages={messages} onSuggest={handleSuggest} onAskSite={handleAskSite} />
-          </main>
-        </div>
+        <>
+          <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 px-4 pt-4">
+            <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden">
+              <AskChat messages={messages} onSuggest={handleSuggest} onAskSite={handleAskSite} />
+            </main>
+          </div>
+          {composer}
+        </>
       ) : (
         <main className="flex min-h-0 flex-1 flex-col">
-          <AskWorkspace
-            onSuggest={handleSuggest}
-            onPick={handlePick}
-            onResume={resume}
-            activeSessionId={messages.length > 0 ? activeSessionId : null}
-            onRemoveSession={handleRemoveSession}
-          />
+          <AskWorkspace onSuggest={handleSuggest}>{composer}</AskWorkspace>
         </main>
       )}
-
-      <AskComposer
-        value={draft}
-        onChange={setDraft}
-        onSend={send}
-        onStop={stop}
-        streaming={streaming}
-        disabled={false}
-      />
     </div>
   )
 }

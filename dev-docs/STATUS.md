@@ -1,13 +1,14 @@
 # STATUS · 项目状态交接（OpenCode 下次启动必读）
 
-> 更新：2026-10-09 · 副参谋（task-22 · M9 收尾工程打包 T1 全绿后，**M9 全部关闭**，线上版本 = M10 + M9-T3 + M9-T4）
+> 更新：2026-10-10 · 副参谋（task-23 · 今日签 + AI 工作台极简 全绿，**纯前端、默认未部署**；线上版本不变 = M10 + M9-T3 + M9-T4）
+> 上一版：2026-10-09 task-22（M9 全关）
 > 本文件是 OpenCode 恢复上下文的第一入口。**任何新任务启动前先读本文件 + 对应任务文档**，不要在不知道项目状态的情况下动手。
 
 ---
 
 ## 一句话现状
 
-**线上版本 = M10 + M9-T3 + M9-T4**（2026-10-09 task-22）：**D1 migration 007**（`check_lock` 表）→ **cron Worker 重部署 version `79b39a46-b8ee-45ad-bed6-dcc8104be605`** → **Pages deployment `625437fb.food-nav-5eb.pages.dev`**。线上 **27 站全 active（0 broken / 0 checking）**、`skip=[8]`。验证全绿：lint 0/0 · verify **52/52**（未改 verify.mjs，语义保持）· build ✓ · 本地 D1 锁并发 429 · 本地/线上全量 remaining=0 · catch-all 404 全路径验证通过。证据 `dev-docs/reports/task-22/`（report.md 汇报 + 截图 4 张 + 日志）。**待部署批次：无。M9 全关。**
+**线上版本 = M10 + M9-T3 + M9-T4**（2026-10-09 task-22，deployment `625437fb`）。**task-23（2026-10-10）已完成并全绿**：首页新增「今日签」贴纸卡（日期种子固定 + 摇签换签 + 站点直达）+ AI 樱见工作台极简化（删双静态面板、单列居中、最近会话收进 header History 图标浮层）→ lint 0/0 · verify **54/54**（52+2，零删除）· build ✓ · 本地 CDP 手动清单 **27/27** · 截图 4 张（`dev-docs/reports/task-23/`）。**待部署批次 = task-23（纯前端，由指挥官决定是否上线）**。
 
 ## 当前里程碑状态
 
@@ -27,6 +28,18 @@
 | **M10 T1 AI 推荐闭环 + 工作台交互修复 + 页面反馈感**（推荐卡主体=追问 / 角落 ExternalLink 打开 · 返回工作台 · askHistory 多会话+单条删除 · 路由 180ms 淡入 · 全局点击散樱） | ✅ 完成（本地 CDP 55/55 · **已部署** 2026-10-07 task-20（Pages `42835c8a`）+ 线上回归 **92/92** + 探针 4/4），见 task-19/20 |
 | **M9-T3 检测豁免机制 + 死链治理**（`sites.skip_check` / pickTargets 三路径排除 / 单站 `{skipped}` 语义 / admin 开关+豁免徽标 / 删 id 9·10 + 插 id 29·30 / tinrry 豁免恢复） | ✅ 完成（单测 36/36 · 本地 16/16 · 线上 API 25/25 · CDP 26/26 · **已部署** 2026-10-08 task-21：migration 006 + cron `b80cb8d5` + Pages `c1bed251`），见 task-21 |
 | **M9-T4 收尾工程打包**（封面破图兜底 / 严格 404 catch-all / CHECK_TIMEOUT_MS 8s / D1 原子锁） | ✅ 完成（lint 0/0 · verify 52/52 · 本地锁并发 429 · 本地/线上全量 remaining=0 · CDP 截图 3+1 · **已部署** 2026-10-09 task-22：migration 007 + cron `79b39a46` + Pages `625437fb`），见 task-22。**M9 全部关闭** |
+| **task-23 今日签 + AI 工作台极简**（DailyFortune 日期种子签卡 + AskWorkspace 砍双面板单列居中 + AskHistoryMenu header 浮层恢复/单删） | ✅ 完成（lint 0/0 · verify **54/54** · 本地 CDP 27/27 · 截图 4 张 · **纯前端未部署** 2026-10-10），见 task-23 |
+
+## 验证结果（2026-10-10 task-23 · 今日签 + AI 工作台极简 · 已完成，默认不部署）
+
+- **改动（红线全绿）**：**新增** `src/components/DailyFortune/{DailyFortune.jsx,fortune.css}`（日期种子签卡：本地 `YYYY-MM-DD` hash 抽分类→站点（跳过 0 站分类）、同日签文稳定、点击摇签 0.6s 动画 + Math.random 换签（650ms 后自动摘 shake class）、站点名 `<a _blank noopener stopPropagation>`、4 模板池、groups 空 render null、全 token 暗色自适配、reduced-motion 关动画）· **新增** `src/ask/AskHistoryMenu.jsx`（`aria-label="历史对话"` lucide History 图标 + z-50 玻璃浮层：时间 + 20 字预览 + 当前徽标 + Trash2 单删 + 空态 + 外点关闭 + storage 同步；打开时在事件里读 `readSessions()` 规避 oxlint set-state-in-effect）· **改** `src/pages/HomePage.jsx`（仅挂 `<DailyFortune groups={groups}/>`，在 Header 之后、`<main>` 之外）· **改** `src/ask/AskWorkspace.jsx`（删「今日美味」「最近会话」双面板 → 单列居中：插画+樱见+问候+children 注入输入框+chips 换一批，保留 `SakuraLogo` 导出）· **改** `src/ask/AskPage.jsx`（header 右格加 History 浮层（chat 态也渲染）· composer 空态注入工作台列 / 对话态留页底 · 删未用 handlePick · **header 加 `relative z-50`** 修浮层被聊天气泡盖住的层叠问题（header 胶囊 backdrop-blur 截断了浮层 z-50）；SSE/节流/Abort/停止/?q=/返回工作台逐行未动）· **改** `tests/verify.mjs`（+2 断言 52→54 零删除：`.daily-fortune` 存在 + `header [aria-label=历史对话]` 存在）
+- **红线**：`NavCard/**`、`Layout/**`、`MusicPlayer/**`、`TypeWriterQuote.tsx`、主站 `Header.jsx` 零改动（git status 可证）；零新依赖；`tailwind.config.js`/`index.css` token 只复用；无后端/数据库改动
+- **命令基线**：lint **0/0** · verify **54/54** · build ✓（存 `dev-docs/reports/task-23/{lint,verify,build}.txt`）
+- **本地 CDP 手动验收 `t23-accept.mjs` → 27/27**（`accept-log.txt`）：10 项清单全覆盖 —— 签卡位置/贴纸风 · 同日刷新签文一致 + 摇签动画换签 + class 自动清除 · 站点链接新开不摇签 · 暗色 token · 375 无溢出 · /ask 无双面板单列居中 · History 浮层列 2 条 + 恢复 + 外关 + Trash 2→1→空态 · 对话态图标在 · `?q=` 预填 + 发送/■停止/流式回复（真实 glm-4-flash）/返回工作台立即落盘/清空对话 · 主站收藏 toggle/主题/搜索/音乐无回归 · 全程无未捕获页面异常
+- **截图 4 张**（`dev-docs/reports/task-23/`）：`01-home-fortune-light` · `02-ask-workspace-minimal` · `03-history-dropdown` · `04-home-fortune-dark`（附加）
+- **过程坑（详见 report §5）**：① 浮层被气泡盖住 → header `relative z-50`（`elementFromPoint` 实测）；② CDP 同 URL navigate 是同文档导航不重载 → 脚本改 `Page.reload`；③ 首版 shake class 常驻 + dist 未重建 → 改独立 shaking state + 重建；④ 服务端收藏合并后首卡可能已收藏 → 断言改「翻转 ±1」
+- **部署**：**默认不部署**（任务卡口径）。上线命令 `npm run build && npx wrangler pages deploy dist --project-name food-nav`（纯前端；回滚回 `625437fb`）
+- **汇报全文**：`dev-docs/reports/task-23/report.md`
 
 ## 验证结果（2026-10-09 task-22 · M9 收尾工程打包 T1 · 已部署）
 
@@ -161,7 +174,7 @@
 | D1 库 | `food-nav-db`，id `b3f7564d-03d5-4ce0-b3ff-a252878dac96`；远程迁移 **001+002+003+004+005+006+007 已全部执行**（007-check-lock 于 2026-10-09 执行 ×2 幂等确认） |
 | 生产 secrets | `ADMIN_PASSWORD` / `ADMIN_SECRET` / `GLM_API_KEY` / **`FAVORITE_SALT`** 均已 `wrangler pages secret put`（**值只在对话中传递，勿写入任何将提交的文件**；本地开发用 `functions/.dev.vars` 同步，已 .gitignore） |
 | cron Worker | `food-nav-link-check-cron`，`crons=["0 4 * * *"]`（**task-22 随 checker.js 改动重部署**，version `79b39a46-b8ee-45ad-bed6-dcc8104be605`；部署顺序必须 cron 先、Pages 后） |
-| **待部署** | **无（2026-10-09 task-22 清零）**：线上版本 = **M10 + M9-T3 + M9-T4**，Pages deployment `625437fb.food-nav-5eb.pages.dev`（`https://625437fb.food-nav-5eb.pages.dev`，2026-10-09）。**回滚**：`npx wrangler pages deployment list --project-name food-nav` 回上一个 deployment → `c1bed251`（M9-T3）；再上 `42835c8a`（M10）。cron 可回 `b80cb8d5`；D1 007 为纯增量表可留不删 |
+| **待部署** | **task-23（2026-10-10，纯前端）**：今日签 + 工作台极简，本地全绿（verify 54/54 · CDP 27/27），**等指挥官决定是否上线** → `npm run build && npx wrangler pages deploy dist --project-name food-nav`。线上当前版本 = **M10 + M9-T3 + M9-T4**，Pages deployment `625437fb.food-nav-5eb.pages.dev`（2026-10-09）。**回滚**：`npx wrangler pages deployment list --project-name food-nav` 回上一个 deployment → `c1bed251`（M9-T3）；再上 `42835c8a`（M10）。cron 可回 `b80cb8d5`；D1 007 为纯增量表可留不删 |
 | 部署命令 | Pages：`npm run build && npx wrangler pages deploy dist --project-name food-nav`；cron：`npx wrangler deploy --config cron/wrangler.toml` |
 | Cloudflare 账号 | 67a7b579cd22f292b900fd445e139cf9 |
 
@@ -180,7 +193,7 @@
 
 1. 主站 UI/组件/交互零改动：`src/components/**`（**只允许新增文件**——MusicPlayer/PageDeco/effects 红线语义内已获准，不允许改现有文件）、`index.css`、`tailwind.config.js`
 2. `src/data/navSources.js`：仅作 fallback 快照
-3. `tests/verify.mjs`：断言语义不可破坏（现 **52** 条）；演进需走任务卡审批
+3. `tests/verify.mjs`：断言语义不可破坏（现 **54** 条，task-23 起 52+2）；演进需走任务卡审批
 4. 运行时依赖不新增（wrangler 仅 devDependency）
 5. 生产 secrets 值禁止写入任何将提交 GitHub 的文件
 
@@ -197,6 +210,8 @@
 9. ~~**m3-api-tests 2 条期望过期**~~ → **task-18 已闭环**：由独立单测 `dev-docs/reports/task-18/t18-grade.mjs` 覆盖（**49/49**），无需再改历史脚本
 10. ~~**检测超时固定 5000ms**~~ → **task-22 已闭环**：`CHECK_TIMEOUT_MS=8000`（最坏 HEAD+GET 16s < timeBudget 18s），线上全量验证 remaining=0、无连续超时误判
 
-## 下一步（M9 全关，等用户启动）
+## 下一步（task-23 完成，等指挥官决策）
 
-**M9 已全部关闭**（T1 收藏服务端化 · T2 分级修正 · T3 豁免机制 · T4 收尾工程打包，task-16~22）。线上 = M10 + M9-T3 + M9-T4，27 站全 active。M10 后续候选：**热度衰减公式**。细节与用户对齐后写任务卡。
+1. **task-23 部署决策**：今日签 + 工作台极简已全绿（纯前端），**默认不部署**；要上线执行 `npm run build && npx wrangler pages deploy dist --project-name food-nav`（cron/D1 零改动）。
+2. **M10 后续候选**：热度衰减公式。细节与用户对齐后写任务卡。
+3. M9 已全部关闭（T1~T4，task-16~22）；线上 27 站全 active。

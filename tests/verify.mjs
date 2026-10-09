@@ -730,11 +730,21 @@ const askEntry = qa('button').find((b) => (b.textContent || '').includes('问问
 // 新增断言 ①（47 → 49）：HomePage 出现「问问樱见」入口按钮（M8 品牌改名，语义不变）
 check('home shows ask entry button', Boolean(askEntry), 'entry button not found')
 
+// 新增断言 ①（task-23，52 → 53）：首页「今日签」贴纸卡（.daily-fortune 存在即成立）
+check('home shows daily fortune card', !!q('.daily-fortune'), 'daily fortune card not found')
+
 if (askEntry) askEntry.click()
 // 懒加载 chunk：等待 /ask 渲染出提问输入框（动态 import 需 await）
 const askInput = await waitFor(() => q('textarea'), 8000)
 // 新增断言 ②（47 → 49）：#/ask 路由可达且渲染出输入框
 check('/ask route renders composer', Boolean(askInput), 'composer not found')
+
+// 新增断言 ②（task-23，53 → 54）：ask header 的 History 图标按钮（aria-label=历史对话）
+check(
+  'ask header shows history button',
+  !!q('header [aria-label="历史对话"]'),
+  'history button not found',
+)
 
 // 流式冒烟（不新增断言）：发送 → mock SSE 累积 → 收尾渲染
 if (askInput) {
