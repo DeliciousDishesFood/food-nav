@@ -1,0 +1,71 @@
+# task-16 CDP 验收日志 · 2026-10-06T15:56:01.859Z
+# target=http://127.0.0.1:8788/#/ · fv_id=051ea400-0020-4455-8ae9-e9c4d611f5c4
+
+  ok  GET /api/favorites without cookie -> 401 no_visitor
+  ok  fresh fv_id cookie issued by middleware
+  ok  heart click sends PUT /api/favorites/{id}
+  ok  PUT carries X-Fav-Sign (32-hex)
+  ok  PUT body visitor_id === fv_id cookie
+  ok  PUT path is /api/favorites/{siteId}
+  ok  aria-pressed flips to true
+  ok  favorite written to localStorage
+  ok  GET /api/favorites returns [{siteId,name}]
+  ok  favorite kept after refresh (local + server)
+  ok  shot 01-favorites-refresh-kept.png: pixel probe shows expected content
+  ok  unfavorite sends DELETE /api/favorites/{id}
+  ok  GET list empty after cancel
+  ok  offline: favorite kept locally (no rollback)
+  ok  offline favorite uploaded after reload (merge sync)
+  ok  offline favorite cleaned up (cancel works)
+  ok  ?sort=heat returns heat_score desc
+  ok  favorite +1 → favorite_count+1 & heat+5
+  ok  no /api/track/favorite request (防双计)
+  ok  admin dashboard shows 站点热度榜 with rows
+  ok  board columns #/站点/分类/收藏/点击/热度
+  ok  board rows 1..10
+  ok  heat column highlighted (text-food-primary)
+  ok  board row0 matches live API top site
+  ok  board row reflects live favorite (+1/+5)
+  ok  shot 02-heat-board.png: pixel probe shows expected content
+  ok  unfavorite → count-1 & heat back to baseline
+  ok  lazy load renders all cards after scroll (23-ish)
+  ok  heart aria-label action semantics kept
+  ok  typewriter quote non-empty
+  ok  search filters with result chip
+  ok  click report /api/track/click still works
+  ok  dark mode toggles on
+  ok  heat board token ok in dark mode
+  ok  main site no horizontal overflow @375
+  ok  shot 03-main-375.png: pixel probe shows expected content
+  ok  heat board table container exists @375
+  ok  board table scrolls horizontally, page not broken @375
+  ok  board scrolled horizontally (wrapLeft>0) & heading in view
+  ok  shot 04-heat-board-375.png: pixel probe shows expected content
+  ok  body visitor_id ≠ cookie -> 400 visitor_mismatch
+  ok  missing X-Fav-Sign -> 401 bad_sign
+  ok  wrong X-Fav-Sign -> 401 bad_sign
+  ok  35 rapid PUTs all HTTP 200 (静默)
+  ok  first 30 favorited:true
+  ok  after 30 -> limited:true & favorited:null
+  ok  cleanup DELETE succeeds
+  ok  final server list empty
+  ok  rate-test site stats restored to baseline
+
+# fresh minute bucket (script start)
+# fv_id=051ea400-0020-4455-8ae9-e9c4d611f5c4
+# active sites (API) = 23
+# card0 = 下厨房
+# screenshot → 01-favorites-refresh-kept.png
+# offline card = 豆果美食
+# admin logged in
+# boardTop=豆果美食 · favorited=下厨房 (in Top10)
+# screenshot → 02-heat-board.png
+# admin token still valid (no login)
+# screenshot → 03-main-375.png
+# admin token still valid (no login)
+# table wrap client=307 scroll=520 left=213
+# screenshot → 04-heat-board-375.png
+# fresh minute bucket (rate test)
+# fresh minute bucket (cleanup)
+
+RESULT: 49 passed / 0 failed

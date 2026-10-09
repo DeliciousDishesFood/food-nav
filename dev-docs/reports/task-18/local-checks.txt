@@ -1,0 +1,55 @@
+# task-18 · 本地分级验收日志 · 2026-10-07T13:21:25.436Z
+# pages dev http://127.0.0.1:8788 + mock targets 127.0.0.1:8899
+
+[login] ok (token len=118)
+
+[snapshot.before] total=39 {"active":31,"checking":0,"broken":8}
+
+[2] 单站分级检测
+  ok  2. site 2 豆果美食（真实 403 反爬 → 复活 active） → active
+       code=200 note=HTTP 200
+  ok  2. site 71 M3测试-403（mock 403 → broken 复活） → active
+       code=403 note=HTTP 403（GET，HEAD 403）（反爬拦截但站点可达）
+  ok  2. site 74 M3测试-500（mock 500 降级 → checking→active） → active
+       code=500 note=HTTP 500（GET，HEAD 500）（服务降级但站点可达）
+  ok  2. site 75 M3测试-302（重定向 → active） → active
+       code=200 note=HTTP 200
+  ok  2. site 73 M3测试-无HEAD（HEAD 405 回退 GET → active） → active
+       code=200 note=HTTP 200（GET，HEAD 405）
+  ok  2. site 8 Tinrry（TLS/DNS 真死 → 保持 broken） → broken
+       code=0 note=network error: internal error; reference = bcspeqp2nk04l1fne5ukr60f，HEAD network error: internal error; reference = hkv7e2u992rae627jncrvun3（网络层不可达，连续 2 次判失效）
+  ok  2. site 9 甜品实验室（DNS 真死 → 保持 broken） → broken
+       code=0 note=network error: internal error; reference = mq1jgmdmuhov9q3dhr752cpu，HEAD network error: internal error; reference = h47net6t0q8bte4hkr7p3keg（网络层不可达，连续 2 次判失效）
+  ok  2. site 72 M3测试-超时（mock /hang → 保持 broken） → broken
+       code=0 note=timeout 5000ms，HEAD timeout 5000ms（网络层不可达，连续 2 次判失效）
+
+[3] 全量检测（since 循环，候选含 broken）
+  round 1: checked=10 total=39 remaining=29 active=6 broken=4 checking=0
+  round 2: checked=10 total=29 remaining=19 active=9 broken=1 checking=0
+  round 3: checked=10 total=19 remaining=9 active=10 broken=0 checking=0
+  round 4: checked=9 total=9 remaining=0 active=6 broken=3 checking=0
+  ok  3. 全量跑完 remaining=0
+  ok  3. broken 站点进入候选被重测（8/8）
+       被重测的原 broken 站: 62, 64, 72, 8, 9, 10, 19, 21
+
+[4] 显示策略
+  ok  4. GET /api/sites（默认）只回 active（31 条）
+
+[snapshot.after] total=39 {"active":31,"checking":0,"broken":8}
+
+[check_logs] HTTP 200 total=476，最近 12 条
+  2026-10-07 13:21:25.357 site=72 M3测试-超时 ok=false code=0 10027ms note=timeout 5000ms，HEAD timeout 5000ms（网络层不可达，连续 2 次判失效）
+  2026-10-07 13:21:16.352 site=5 日日煮 ok=true code=200 1090ms note=HTTP 200
+  2026-10-07 13:21:15.754 site=8 Tinrry 甜悦家 ok=false code=0 479ms note=network error: internal error; reference = 7gstl7va54pavsq99n9lfebs，HEAD network error: internal error; reference = 1qcki27u8p3phb6fjl9j0r9b（网络层不可达，连续 2 次判失效）
+  2026-10-07 13:21:15.470 site=2 豆果美食 ok=true code=200 206ms note=HTTP 200
+  2026-10-07 13:21:15.324 site=9 甜品实验室 ok=false code=0 47ms note=network error: internal error; reference = b9uv8ibrmbgmt0hs1ao0vfmv，HEAD network error: internal error; reference = qv562aq1v4l357ohhlcuoks9（网络层不可达，连续 2 次判失效）
+  2026-10-07 13:21:15.276 site=73 M3测试-无HEAD ok=true code=200 4ms note=HTTP 200（GET，HEAD 405）
+  2026-10-07 13:21:15.274 site=75 M3测试-302 ok=true code=200 5ms note=HTTP 200
+  2026-10-07 13:21:15.270 site=74 M3测试-500 ok=true code=500 7ms note=HTTP 500（GET，HEAD 500）（服务降级但站点可达）
+  2026-10-07 13:21:15.268 site=71 M3测试-403 ok=true code=403 3ms note=HTTP 403（GET，HEAD 403）（反爬拦截但站点可达）
+  2026-10-07 13:21:15.202 site=22 京东生鲜 ok=true code=200 1096ms note=HTTP 200
+  2026-10-07 13:21:14.724 site=23 本来生活 ok=true code=200 628ms note=HTTP 200
+  2026-10-07 13:21:14.609 site=16 星巴克中国 ok=true code=206 505ms note=HTTP 206（GET，HEAD 404）
+  ok  4. check_logs 可读且含分级 note
+
+RESULT: 12 passed / 0 failed

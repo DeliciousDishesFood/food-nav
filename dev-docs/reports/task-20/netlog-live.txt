@@ -1,0 +1,61 @@
+# task-20 NetLog 证据（CDP Network，线上；收藏 PUT/DELETE + AI SSE）
+# 时间 2026-10-07T16:32:45.490Z
+
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+PUT https://food-nav.shiora.cc/api/favorites/1
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: 7e6da1de6dbb25dee239d2c1b5e8f596
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+DELETE https://food-nav.shiora.cc/api/favorites/1
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: 7e6da1de6dbb25dee239d2c1b5e8f596
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+POST https://food-nav.shiora.cc/api/ai/chat
+  status: 200
+  content-type: text/event-stream; charset=utf-8
+  X-Fav-Sign: -
+POST https://food-nav.shiora.cc/api/ai/chat
+  status: 200
+  content-type: text/event-stream; charset=utf-8
+  X-Fav-Sign: -
+POST https://food-nav.shiora.cc/api/ai/chat
+  status: 200
+  content-type: text/event-stream; charset=utf-8
+  X-Fav-Sign: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+
+# 说明：收藏测完已取消还原；AI 为 GLM SSE 流式；测毕 localStorage 已清理。

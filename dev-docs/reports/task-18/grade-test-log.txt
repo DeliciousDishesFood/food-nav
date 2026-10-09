@@ -1,0 +1,54 @@
+# task-18 · M9-T2 分级单测日志 · 2026-10-08T14:43:18.392Z
+# 覆盖 403/404/503/超时/DNS-TLS/429 六组 + pickTargets 复活候选 + SUSPICIOUS 清除
+
+  ok  1. 403 → status active
+  ok  1. 403 → fail_count 清零
+  ok  1. 403 → logOk=1（写日志为成功）
+  ok  1. 403 note 标注反爬可达
+  ok  2. 404 第一次 → fail_count=1 且仍 active
+  ok  2. 404 第二次 → fail_count=2 且 broken
+  ok  2. 404 note 标注页面已消失
+  ok  2. 判死阈值 = 2
+  ok  2. 410（fail_count 已 1）→ 立即 broken
+  ok  3. 503 → status active
+  ok  3. 503 → fail_count 清零
+  ok  3. 503 note 标注服务降级但可达
+  ok  3. 502 → active 清零
+  ok  3b. 526 第一次 → fail=1 且 checking
+  ok  3b. 526 note 标注源站不可达
+  ok  3b. 526 第二次 → fail=2 且 broken
+  ok  3b. 530 第一次 → fail=1 且 checking
+  ok  3b. 530 note 标注源站不可达
+  ok  3b. 530 第二次 → fail=2 且 broken
+  ok  3b. 边缘错误站恢复 200 → 复活 active
+  ok  4. 超时 → failMode=increment 且首败 checking
+  ok  4. 超时第一次 → fail_count=1 且 checking
+  ok  4. 超时第二次 → fail_count=2 且 broken
+  ok  4. 超时 note 保留 timeout 证据
+  ok  5. DNS 错误第一次 → fail_count=1 且 checking
+  ok  5. DNS 错误第二次 → broken
+  ok  5. TLS 证书错误第二次 → broken
+  ok  5. 网络层 note 标注不可达
+  ok  6. 429(active, fail=1) → 状态与计数不变
+  ok  6. 429(checking, fail=2) → 不被误判 broken
+  ok  6. 429(broken) → 维持 broken
+  ok  6. 429 logOk=1 且 note 标注限流
+  ok  A. HTTP 200 → active 且清零
+  ok  A. HTTP 206 → active 且清零
+  ok  A. HTTP 301 → active 且清零
+  ok  A. HTTP 302 → active 且清零
+  ok  A. HTTP 401 → active 且清零
+  ok  A. HTTP 406 → active 且清零
+  ok  A. HTTP 418 → active 且清零
+  ok  A. HTTP 999 → active 且清零
+  ok  B. broken 站 200 → 复活 active 且 fail_count=0
+  ok  C. 默认全量路径候选含 broken
+  ok  C. since 路径（cron/手动全量）候选含 broken
+  ok  C. since 路径仍按 last_checked_at 最久优先
+  ok  C. 单站路径不过滤 status
+  ok  D. checker.js 已无 SUSPICIOUS 字样
+  ok  D. checker.js 已无 isSuspiciousCode
+  ok  D. SUSPICIOUS_BREAK_AFTER 导出已删除
+  ok  D. 仍导出 gradeResult / nextSiteState / pickTargets
+
+RESULT: 49 passed / 0 failed

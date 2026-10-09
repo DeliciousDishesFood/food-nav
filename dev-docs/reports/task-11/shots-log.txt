@@ -1,0 +1,15 @@
+login ok=true
+shot1: admin visit stats chart
+  admin shell tab visible=true
+  chart rendered=true
+  saved 01-admin-stats-chart.png
+  375 overflow check: scrollWidth=375 clientWidth=375 noOverflow=true
+  saved 04-admin-stats-375.png
+  sites table visible=true
+  rows: ["douguo.com => 豆果美食 | utensils-crossed | \t家常菜谱\twww.douguo.com\t—\t1\t正常 | 最近 10-05 19:21 | \t | 检测 | 编辑 | 删除","tinrry.com => Tinrry 甜悦家 | cupcake | \t烘焙甜点\twww.tinrry.com\t—\t2\t失效 | 最近 10-05 19:21 | \t | 检测 | 编辑 | 删除"]
+  shot2 headerTop={"headerTop":132,"visible":true}
+  saved 02-check-two-sites.png
+shot3: main site tag badge
+  main cards=yes
+  tag badge found=true (热门)
+  saved 03-main-tag-badge.png

@@ -1,0 +1,30 @@
+shot1: /ask streaming answer + recommend cards
+  home entry button=true
+  /ask composer=true
+  stop button while streaming=true
+  answer finished + recommend cards=true
+  answer: {"len":281,"head":"给您推荐几个烘焙甜点网站：1. 君之烘焙，经典家庭烘焙博客，配方稳定靠谱，网址是[君之烘焙](https://www.j","cards":4,"names":["🧁","🧁","🧁","🧁"]}
+  saved 01-ask-answer-recommend.png
+  stop button works=true
+  follow-up context="第一个推荐的烘焙甜点网站是“君之烘焙”，网址是"
+  network: {"bigmodel":0,"chat":2,"chatOnlySameOrigin":true}
+  page html key check=clean
+shot2: category transition
+  category-fade animation="food-fade-up"
+  mid-animation: {"name":"food-fade-up","dur":"0.18s","opacity":"0.638127","cards":4}
+  saved 02-category-transition.png
+  after switch: {"cards":4,"opacity":"1"}
+shot3: 375 mobile ask page
+  375 composer=true
+  375 layout: {"scrollW":375,"clientW":375,"noOverflow":true,"composerBottom":800,"vh":812,"composerVisible":true}
+  saved 03-ask-375.png
+  direct /ask reachable=true
+  AskPage chunk loaded only on /ask (after home visit earlier)=true
+--- retake ---
+shot1 retake
+  composer=true
+  done=true
+  saved 01-ask-answer-recommend.png
+shot3 retake (375)
+  375: {"overflow":true,"placeholder":"问点什么，比如：有什么网站推荐？","placeholderLen":16,"h":49,"lineHeight":"21px","bottom":800,"vh":812}
+  saved 03-ask-375.png

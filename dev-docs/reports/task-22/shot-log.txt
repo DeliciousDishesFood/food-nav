@@ -1,0 +1,4 @@
+RESULT: 3 passed / 0 failed
+  ok  broken cover → CoverPlaceholder (no broken img)
+  ok  /api/abc 404 envelope
+  ok  375 no horizontal overflow

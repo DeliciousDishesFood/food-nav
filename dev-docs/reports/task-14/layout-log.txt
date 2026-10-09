@@ -1,0 +1,130 @@
+
+[1] header: 悬浮圆角毛玻璃胶囊 + 品牌组/分隔线/清空对话
+  wait ok: composer
+  ok  header outer transparent (no solid bar)  [rgba(0, 0, 0, 0)]
+  ok  header outer no bottom border  [0px]
+  ok  capsule radius 20px  [20px]
+  ok  capsule bg-white/70  [rgba(255, 255, 255, 0.7)]
+  ok  capsule backdrop-blur-md  [blur(12px)]
+  ok  capsule floating mt-3  [12px]
+  ok  capsule padding py-2.5  [10px/10px]
+  ok  capsule inner padding px-4  [16px]
+  ok  capsule spans content column (1120px @1440)  [1120]
+  ok  capsule left aligns to content column  [155]
+  ok  capsule centered (left inset = right inset)  [155/155]
+  ok  left = 回到主站 / right = 清空对话  [["← 回到主站","清空对话"]]
+  ok  brand divider present 1x20  [{"w":1,"h":20}]
+  ok  divider visible (non-transparent)  [rgb(169, 155, 187) op=0.45]
+  ok  title kept 食光 AI 问答  [✨ 食光 AI 问答]
+  ok  capsule no horizontal overflow  [1118/1118]
+  header layout: {"top":12,"left":155,"w":1120,"h":52}
+  shot 01-header-two-col.png
+
+[2] 空态引导紧凑 + aside 统一
+  ok  empty panel max-w-lg (512px)  [512px]
+  ok  empty container px-3  [12px]
+  ok  empty panel px-5  [20px]
+  ok  empty panel py-7  [28px]
+  ok  illustration h-24 w-36  [{"w":144,"h":96}]
+  ok  title gap mt-3  [12px]
+  ok  chips gap mt-4  [16px]
+  ok  refresh gap mt-3  [12px]
+  ok  empty chips 3-4  [["深夜甜品灵感站","今天想看家常菜谱","茶饮咖啡急救包","零失败早餐搭配"]]
+  ok  empty guide fits one screen (no big blank)  [448/900]
+  ok  greeting present
+  ok  aside gap-3  [12px]
+  ok  aside w-72 + lg:flex  [288/flex]
+  ok  3 panels uniform p-3.5 + rounded-[22px]  [[{"pad":"14px","radius":"22px"},{"pad":"14px","radius":"22px"},{"pad":"14px","radius":"22px"}]]
+  ok  brand desc mt-1  [4px]
+  ok  inspire head mb-2  [8px]
+  ok  aside chips gap-1.5  [6px]
+  ok  aside chip px-2.5 py-1  [10px/4px]
+  ok  daily head mb-2  [8px]
+  ok  daily list gap-0.5  [2px]
+  ok  daily row py-1.5  [6px]
+  ok  daily foot mt-2 text-[11px]  [8px/11px]
+  ok  emoji block kept 32x32  [32x32]
+
+[3] 输入条：去白色通栏 + 悬浮胶囊 + 按钮 ≥44px
+  ok  bottom bar transparent (no white band)  [rgba(0, 0, 0, 0)]
+  ok  bottom bar no top border  [0px]
+  ok  bottom bar no backdrop-blur band  [none]
+  ok  capsule rounded-[28px]  [28px]
+  ok  capsule min-h 52px  [52px]
+  ok  capsule actual height >= 52  [58]
+  ok  capsule ask-panel glass bg  [rgba(255, 255, 255, 0.72)]
+  ok  textarea aria-label preserved  [提问输入框]
+  ok  textarea inset = px-5 total (6+14 or 8+12)  [12px/10px]
+  ok  textarea max-h 150 kept  [150px]
+  ok  textarea native scrollbar hidden  [none]
+  ok  send button >= 44x44  [{"w":44,"h":44}]
+  ok  row pt-2  [8px]
+  ok  row keeps safe-area pb (>=12px)  [12px]
+  ok  row max-w-6xl kept  [1152px]
+  ok  composer capsule aligns to header capsule  [{"composer":[155,155],"header":{"left":155,"right":1275}}]
+  ok  capsule fully inside viewport  [881/900]
+  ok  capsule focus ring via :focus-within  [rgba(255, 107, 157, 0.18) 0px 0px 0px 3px, rgba(244, 114, 182, 0.12) 0px 8px 30px 0px, rgba(75, 58, 85, 0.05) 0px 2px 8p]
+
+[4] 消息间距 + 滚动条 thumb 与内容间距
+  ok  send clicked
+  wait ok: reply finished
+  ok  reply stream completed
+  ok  message list space-y-4 (16px row gap)  [16px]
+  ok  message list px-3  [12px/12px]
+  ok  native scrollbar hidden  [none]
+  ok  thumb visible (content overflows)  [{"left":954,"w":3,"rightInset":6,"h":452}]
+  ok  thumb right-1.5 (6px) + w-3px  [{"left":954,"w":3,"rightInset":6,"h":452}]
+  ok  thumb vs bubble gap >= 12px  [62.4]
+  ok  content right edge >= 12px from container edge  [12]
+  ok  .ask-bubble-me gradient intact  [linear-gradient(135deg, rgb(255, 143, 177) 0%, rgb(255, 182, 205) 100%)]
+  ok  .ask-bubble-me white text intact  [rgb(255, 255, 255)]
+  ok  AI bubble keeps warm white glass  [rgba(255, 255, 255, 0.78)]
+  ok  ask-page warm gradient intact  [linear-gradient(rgb(255, 245, 249) 0%, rgb(253, 247, 255) 52]
+  thumb/bubble metrics: {"gapBubbleToThumb":62.4,"gapRowToThumb":3,"contentRightToContainer":12}
+  ok  post-answer chips 3-4  [["深夜甜品灵感站","今天想看家常菜谱","茶饮咖啡急救包","零失败早餐搭配"]]
+  ok  recommend cards rendered  [n=2]
+  shot 02-composer-scrollbar.png
+
+[5] 停止按钮尺寸 + 暗色模式 + 配色回归
+  wait ok: stop button during stream
+  ok  stop button rendered  [{"w":46,"h":44,"label":"■ 停止"}]
+  ok  stop button >= 44x44  [{"w":46,"h":44,"label":"■ 停止"}]
+  wait ok: stopped state
+  ok  stop aborts stream
+  ok  dark header capsule token  [rgba(36, 26, 51, 0.75) | rgba(255, 255, 255, 0.1)]
+  ok  dark composer capsule token  [rgba(44, 33, 64, 0.8)]
+  ok  dark bubble-me keeps sakura gradient  [linear-gradient(135deg, rgb(255, 122, 166) 0%, rgb(255, 159, 192) 100%]
+  ok  dark aside panel token  [rgba(44, 33, 64, 0.8)]
+  ok  dark page gradient intact  [linear-gradient(rgb(36, 26, 51) 0%, rgb(]
+  shot 04-dark-header-composer.png
+  ok  清空对话 returns to empty state  [{"cleared":true,"emptyBack":true}]
+
+[6] 交互回归：空态 chips / 换一批 / 点击提问 / 回主站
+  ok  empty-state chips 3-4  [["深夜甜品灵感站","今天想看家常菜谱","茶饮咖啡急救包","零失败早餐搭配"]]
+  ok  换一批 refreshes chips  [["深夜甜品灵感站","今天想看家常菜谱","茶饮咖啡急救包","零失败早餐搭配"] => ["挖一挖烘焙甜点好站","零失败早餐搭配","茶饮咖啡灵感库"]]
+  ok  chips click sends question  [挖一挖烘焙甜点好站 vs 挖一挖烘焙甜点好站]
+  wait ok: chip reply finished
+  ok  回到主站 clicked
+  wait ok: home page restored
+  ok  回到主站 works  [{"home":true,"atHome":true}]
+
+[7] ?q= 预填
+  wait ok: prefill composer
+  ok  ?q= prefilled  [有什么烘焙网站推荐]
+
+[8] 375 移动端
+  wait ok: mobile composer
+  ok  375 no horizontal overflow  [375/375]
+  ok  375 sidebar hidden (single column)
+  ok  375 header capsule has side margins  [16/16]
+  ok  375 header capsule no overflow  [341/341]
+  ok  375 header buttons inside capsule
+  ok  375 header title fits (not truncated)  [✨ 食光 AI 问答 w=239 limit=343]
+  ok  375 composer visible  [793/812]
+  ok  375 placeholder fits single line  [273/273]
+  ok  375 send button >= 44  [{"w":44,"h":44}]
+  ok  375 empty panel fits width  [319]
+  ok  375 chat column full width  [343]
+  shot 03-mobile-375.png
+
+RESULT: 98 passed / 0 failed

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { navSource, getCategoryList } from '../data/navSources.js'
+import { navSource } from '../data/navSources.js'
 import { useFavorites } from './useFavorites.js'
 import { STORAGE_KEYS, readString, writeString } from '../utils/storage.js'
 
@@ -7,21 +7,33 @@ import { STORAGE_KEYS, readString, writeString } from '../utils/storage.js'
 export const FAVORITES_CATEGORY = 'favorites'
 const DEFAULT_CATEGORY = 'all'
 
-/** localStorage 里存的分类可能是旧值 / 被篡改，先校验再用 */
-function normalizeCategory(key) {
+/**
+ * 校验选中分类是否仍然存在（M2 起数据源为后端分类，管理员删分类后 key 会失效）
+ * 校验集合：navList 的 categoryKey（外加虚拟的 all / favorites）
+ */
+function normalizeCategory(key, navList) {
   const valid =
+    key === DEFAULT_CATEGORY ||
     key === FAVORITES_CATEGORY ||
-    getCategoryList().some((tab) => tab.key === key)
+    navList.some((group) => group.categoryKey === key)
   return valid ? key : DEFAULT_CATEGORY
 }
 
-export function useFilterNav() {
+/**
+ * 导航筛选 hook（搜索 / 分类 / 收藏过滤）
+ * @param {Array} [navList] 外部数据源（M1：后端 API 归一化结果）；缺省用 navSources 本地快照
+ */
+export function useFilterNav(navList = navSource) {
   const [searchText, setSearchText] = useState('')
   // 分类标签记忆：刷新后自动恢复上次选中的分类
-  const [activeCategoryKey, setActiveCategoryKey] = useState(() =>
-    normalizeCategory(readString(STORAGE_KEYS.category, DEFAULT_CATEGORY)),
+  const [storedCategoryKey, setStoredCategoryKey] = useState(() =>
+    normalizeCategory(readString(STORAGE_KEYS.category, DEFAULT_CATEGORY), navList),
   )
   const favorites = useFavorites()
+
+  // 数据更新（管理员删分类）后失效 key 自动回落「全部」——派生值，无需 effect：
+  // normalizeCategory 会把不在 navList 中的 key 映射为 all，随 navList 变化即时生效
+  const activeCategoryKey = normalizeCategory(storedCategoryKey, navList)
 
   useEffect(() => {
     writeString(STORAGE_KEYS.category, activeCategoryKey)
@@ -30,7 +42,7 @@ export function useFilterNav() {
   const filteredNavList = useMemo(() => {
     const keyword = searchText.trim().toLowerCase()
 
-    return navSource
+    return navList
       .map((group) => {
         let items = group.items
 
@@ -54,13 +66,13 @@ export function useFilterNav() {
         return items.length > 0 ? { ...group, items } : null
       })
       .filter(Boolean)
-  }, [searchText, activeCategoryKey, favorites])
+  }, [searchText, activeCategoryKey, favorites, navList])
 
   return {
     searchText,
     setSearchText,
     activeCategoryKey,
-    setActiveCategoryKey,
+    setActiveCategoryKey: setStoredCategoryKey,
     filteredNavList,
   }
 }

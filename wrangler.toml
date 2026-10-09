@@ -1,0 +1,12 @@
+# 食光导航 · Cloudflare Pages + D1 配置（M1）
+# 前端与 API 同源：functions/ 目录由 Pages 自动构建为 /api/* 路由
+name = "food-nav"
+compatibility_date = "2026-10-03"
+pages_build_output_dir = "dist"
+
+# D1 绑定：Pages Functions 内通过 context.env.DB 访问
+# database_id 来自 `npx wrangler d1 create food-nav-db`
+[[d1_databases]]
+binding = "DB"
+database_name = "food-nav-db"
+database_id = "b3f7564d-03d5-4ce0-b3ff-a252878dac96"

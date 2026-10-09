@@ -1,0 +1,25 @@
+﻿
+ 鉀咃笍 wrangler 4.148.0
+鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+Resource location: remote 
+
+node.exe : [33m鈻?[43;33m[[43;30mWARNING[43;33m][0m [1m鈿狅笍 This process may take some time, during which your D1 d
+atabase will be unavailable to serve queries.[0m
+所在位置 行:1 字符: 1
++ & "D:\node.js/node.exe" "D:\node.js/node_modules/npm/bin/npx-cli.js"  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33m鈻?[43;33m...ve queries.[0m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+
+馃寑 Executing on remote database food-nav-db (b3f7564d-03d5-4ce0-b3ff-a252878dac96):
+馃寑 To execute on your local development database, remove the --remote flag from your wrangler command.
+Note: if the execution fails to complete, your DB will return to its original state and you can safely retry.
+鈹?Checking if file needs uploading
+鈹?馃寑 File already uploaded. Processing.
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mduplicate column name: skip_check: SQLITE_ERROR[0m
+
+
+馃  Logs were written to "C:\Users\OMEN\.wrangler\logs\wrangler-2026-10-08_15-04-33_618.log"

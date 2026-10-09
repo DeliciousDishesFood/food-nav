@@ -1,0 +1,57 @@
+===== A (API live, pages dev :8788) =====
+  GET http://127.0.0.1:8788/  ->  (no response captured)
+  GET http://127.0.0.1:8788/  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/  ->  (no response captured)
+  GET http://127.0.0.1:8788/  ->  (no response captured)
+  GET http://127.0.0.1:8788/api/categories  ->  HTTP/1.1 200 OK
+  GET http://127.0.0.1:8788/api/categories  ->  (no response captured)
+  GET http://127.0.0.1:8788/api/sites?status=active&sort=manual  ->  HTTP/1.1 200 OK
+  GET http://127.0.0.1:8788/api/sites?status=active&sort=manual  ->  (no response captured)
+  GET http://127.0.0.1:8788/assets/index-BeGGbwDH.js  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/assets/index-BeGGbwDH.js  ->  (no response captured)
+  GET http://127.0.0.1:8788/assets/index-f7cuaoPo.css  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/assets/index-f7cuaoPo.css  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/burger.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/burger.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/cake.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/cake.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/delivery.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/delivery.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/dessert.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/dessert.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/dish.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/dish.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/fries.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/fries.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/icecream.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/icecream.svg  ->  (no response captured)
+  GET http://127.0.0.1:8788/covers/noodle.svg  ->  HTTP/1.1 304 Not Modified
+  GET http://127.0.0.1:8788/covers/noodle.svg  ->  (no response captured)
+  -- api calls captured: 4 --
+
+===== B (API down, vite preview :4173) =====
+  GET http://localhost:4173/  ->  (no response captured)
+  GET http://localhost:4173/  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/  ->  (no response captured)
+  GET http://localhost:4173/  ->  (no response captured)
+  GET http://localhost:4173/api/categories  ->  HTTP/1.1 404 Not Found
+  GET http://localhost:4173/api/categories  ->  (no response captured)
+  GET http://localhost:4173/api/sites?status=active&sort=manual  ->  HTTP/1.1 404 Not Found
+  GET http://localhost:4173/api/sites?status=active&sort=manual  ->  (no response captured)
+  GET http://localhost:4173/assets/index-BeGGbwDH.js  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/assets/index-BeGGbwDH.js  ->  (no response captured)
+  GET http://localhost:4173/assets/index-f7cuaoPo.css  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/assets/index-f7cuaoPo.css  ->  (no response captured)
+  GET http://localhost:4173/covers/cake.svg  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/covers/cake.svg  ->  (no response captured)
+  GET http://localhost:4173/covers/dessert.svg  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/covers/dessert.svg  ->  (no response captured)
+  GET http://localhost:4173/covers/dish.svg  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/covers/dish.svg  ->  (no response captured)
+  GET http://localhost:4173/covers/icecream.svg  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/covers/icecream.svg  ->  (no response captured)
+  GET http://localhost:4173/covers/noodle.svg  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/covers/noodle.svg  ->  (no response captured)
+  GET http://localhost:4173/favicon.svg  ->  HTTP/1.1 200 OK
+  GET http://localhost:4173/favicon.svg  ->  (no response captured)
+  -- api calls captured: 4 --

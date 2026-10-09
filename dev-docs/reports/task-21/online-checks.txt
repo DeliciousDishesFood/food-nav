@@ -1,0 +1,46 @@
+# task-21 · 线上验收日志 · 2026-10-08T15:52:46.542Z
+# https://food-nav.shiora.cc · migration 006 + cron + pages 已部署
+
+[0] 探针
+  ok  0. GET / → 200
+  ok  0. GET /api/health → 200
+  ok  0. GET /ask → 200
+  ok  0. GET /api/sites?status=active → 200
+
+[1] sites snapshot · active=27 all=27 {"active":27,"checking":0,"broken":0}
+  ok  1. /api/sites?status=active → 27 条
+  ok  1. /api/sites?status=all → 27 条
+  ok  1. all 中 0 broken / 0 checking
+  ok  1. tinrry(8) active + skipCheck=true + failCount=0
+  ok  1. id 9/10 已删除
+  ok  1. 29 美食天下 active + 描述正确 + 无角标
+  ok  1. 30 好豆网 active + 描述正确 + 无角标
+  ok  1. 所有站点都带 skipCheck 布尔字段
+  ok  2. admin 登录
+  ok  3. 单站检测 tinrry(8) → skipped:true + skippedIds=[8] + total=0
+       {"checked":0,"active":0,"broken":0,"checking":0,"errors":0,"total":0,"remaining":0,"elapsedMs":0,"batch":4,"results":[],"skipped":true,"skippedIds":[8]}
+  ok  3. 跳过后 tinrry 状态未被改写（active / lastCheckedAt 不变）
+  ok  4. 单站检测 美食天下(29) → active
+       code=403 HTTP 403（GET，HEAD 403）（反爬拦截但站点可达） 27ms
+  ok  4. 单站检测 好豆网(30) → active
+       code=200 HTTP 200 2612ms
+
+[5] 全量检测（since 循环）
+  round 1: checked=10 total=26 remaining=16 active=10 checking=0 broken=0
+  round 2: checked=10 total=19 remaining=9 active=9 checking=1 broken=0
+  round 3: checked=9 total=9 remaining=0 active=9 checking=0 broken=0
+  ok  5. 首轮全量 total = 26（27 站 - 1 豁免站）
+  ok  5. 每轮 total ≤ 26（豁免站从不入候选）
+  ok  5. 豁免站 id 8 从未进候选/结果
+  ok  5. 新站 29/30 进入候选被检测
+  ok  5. 全量跑完 remaining=0
+
+[6] 稳定化补检
+  补检 19 (checking)
+    site 19 attempt 1 → broken code=0 timeout 5000ms，HEAD timeout 5000ms（网络层不可达，连续 2 次判失效）
+    site 19 attempt 2 → active code=200 HTTP 200
+  ok  6. 稳定化后 27 站全 active
+  ok  6. 主站默认接口回 27 条
+  ok  6. 豁免站仍 active + skipCheck=true
+
+RESULT: 25 passed / 0 failed

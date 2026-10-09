@@ -1,0 +1,107 @@
+
+[A] ask page: visual / chips / placeholder / send / recommend / stop
+  wait ok: composer
+  ok  ask-page warm gradient bg  [linear-gradient(rgb(255, 245, 249) 0%, rgb(253, 247, 255) 52%, rgb(244, 249, 255]
+  ok  main overflow-x hidden  [hidden]
+  ok  desktop two-column: sidebar visible  [flex 288px]
+  ok  chat column wider than sidebar  [808 vs 288]
+  ok  empty chips count 3-4  [["挖一挖家常菜谱好站","深夜甜品灵感站","零失败早餐搭配"]]
+  ok  chips avoid fixed question form  [["挖一挖家常菜谱好站","深夜甜品灵感站","零失败早餐搭配"]]
+  ok  chips refresh button exists
+  ok  refresh gives new chips batch  [["挖一挖家常菜谱好站","深夜甜品灵感站","零失败早餐搭配"] => ["烤箱新手入门课","零失败早餐搭配","家常菜谱工具箱"]]
+  ok  greeting present  [先吃点好的，再谈别的]
+  placeholder t0: 深夜想吃点甜的？
+  ok  placeholder rotates after ~7s  [深夜想吃点甜的？ -> 搜个靠谱的菜谱网站]
+  ok  placeholder fixed on focus  [问我任何关于美食的问题…]
+  placeholder pool probe: 0 (rotation only)
+  ok  send button clicked
+  ok  caret h=1em & w=2px during stream  [{"h":14,"w":2,"fs":14,"transform":"matrix(1, 0, 0, 1, 0, 2.8)","rect":{"top":180.8000030517578,"bottom":194.8000030517578,"left":286},"line":{"top":177,"bottom":196,"right":282},"thinking":true,"len":4,"ascii":false,"streaming":true}]
+  ok  caret translateY 0.2em (em based)  [matrix(1, 0, 0, 1, 0, 2.8)]
+  ok  caret vertically centered vs line box  [6/6]
+  ok  caret follows 思考中… when empty  [caret.left=286 text.right=282]
+  caret samples=6 lines=6 ascii=0
+  ok  placeholder = streaming text during answer  [美食 AI 正在回答…]
+  wait ok: recommend cards
+  ok  recommend cards 1..6 rendered  [n=2]
+  ok  cards target=_blank + noopener
+  ok  sidebar has no stray external cards  [0]
+  ok  recommend cards staggered entrance  [{"n":2,"name":"ask-pop","delays":[0,0.06]}]
+  shot 01-ask-desktop.png
+  ok  post-reply chips 3-4  [["烤箱新手入门课","零失败早餐搭配","家常菜谱工具箱"]]
+  ok  chat native scrollbar hidden  [{"nativeHidden":true,"scrollable":true,"scrollTop":0,"hasThumb":true,"thumbH":328,"viewport":362,"content":400,"ratioOk":true}]
+  ok  thumb appears when content overflows  [{"nativeHidden":true,"scrollable":true,"scrollTop":0,"hasThumb":true,"thumbH":328,"viewport":362,"content":400,"ratioOk":true}]
+  ok  thumb height = viewport/content ratio  [{"nativeHidden":true,"scrollable":true,"scrollTop":0,"hasThumb":true,"thumbH":328,"viewport":362,"content":400,"ratioOk":true}]
+  ok  thumb drag scrolls chat  [{"dragTarget":{"x":956,"y":244,"before":0},"dragAfter":38}]
+  ok  thumb hidden when content short  [{"scrollable":false,"hasThumb":false}]
+
+[B] composer: auto-grow / no native scrollbar
+  ok  textarea auto-grows  [h=83]
+  ok  textarea capped at 150px  [{"h":83,"inline":"83px","sh":83,"ch":83,"overflowY":"auto","scrollbarWidth":"none","capped":true}]
+  ok  textarea native scrollbar hidden  [none]
+  ok  textarea inner scroll works without visible bar  [{"skip":true}]
+
+[E] overflow: long url in user bubble
+  wait ok: composer for overflow
+  wait ok: user bubble
+  ok  user bubble no horizontal overflow  [scrollWidth=664 clientWidth=664]
+  ok  bubble overflow-wrap anywhere  [anywhere]
+  ok  page has no horizontal scroll  [1430/1430]
+  ok  main clips x only (overflow-x hidden)  [hidden]
+  shot 04-overflow-longurl.png
+  wait ok: previous stream finished (send button back)
+  ok  follow-up carries conversation history  [bodies=2]
+  wait ok: stop button during stream
+  wait ok: stopped state
+  ok  stop button aborts stream
+
+[C] home no-jitter: admin edit -> first frame shows new data
+  ok  seed site found  [下厨房]
+  wait ok: home loaded with seed site
+  ok  nav-cache exists after home load  [["savedAt","groups"]]
+  wait ok: admin shell
+  wait ok: sites table
+  ok  open site edit dialog
+  wait ok: dialog
+  wait ok: site renamed
+  ok  admin rename saved
+  ok  nav-cache refreshed by admin mutation  [{"savedAt":1791280905344,"hasNew":true}]
+  shot 02-home-nojitter.png
+  ok  first frame already shows new data  [11 samples, new=11]
+  ok  snapshot (old seed) never flashes  [oldShown=false]
+  ok  after api resolves: new data + no degraded banner  [食光导航 ✨ 美食灵感整理站 ✨  「就决定是你了！」 就决定是你了！  ✨ 问问美食 AI 全部 我的收藏 家常菜谱 ]
+  ok  seed name restored  [null]
+
+[D] admin cover cell hover clipping
+  wait ok: admin shell for clip
+  wait ok: sites table for clip
+  wait ok: dialog for clip test
+  ok  switch to builtin cover mode
+  ok  cover cell overflow removed (no self clip)  ["visible"]
+  ok  cover cell not clipped by any ancestor  [[]]
+  ok  hover transform active + rounded img  [{"hovered":true,"elAt":"IMG|h-full w-full rounded-xl object-cover","transform":"matrix(1, 0, 0, 1, 0, -2)","top":696,"imgRadius":"12px","imgClip":"none"}]
+  hover state: {"hovered":true,"elAt":"IMG|h-full w-full rounded-xl object-cover","transform":"matrix(1, 0, 0, 1, 0, -2)","top":696,"imgRadius":"12px","imgClip":"none"}
+
+[F] prefers-reduced-motion
+  wait ok: ask page for motion test
+  baseline (no reduce): {"total":94,"active":["ask-drift::before"]}
+  ok  baseline has running animation  [{"total":94,"active":["ask-drift::before"]}]
+  ok  animations disabled under reduced motion  [{"total":94,"active":[]}]
+
+[G] mobile 375
+  wait ok: mobile composer
+  ok  mobile single column (sidebar hidden)  [{"asideHidden":true,"pageScrollW":375,"clientW":375,"composerBottom":793,"vh":812,"taScrollW":273,"taClientW":273,"mainW":343,"sidebarChips":8}]
+  ok  375 no horizontal overflow  [375/375]
+  ok  composer visible inside viewport  [793/812]
+  ok  placeholder fits single line (no truncate)  [273/273]
+  shot 03-ask-375.png
+
+[H] caret: english reply
+  wait ok: composer for caret en test
+  ok  english prompt sent
+  ok  english caret samples captured  [{"total":31,"en":1,"text":"Pancakes are a delightful breakfast dish made from a batter,"}]
+  ok  english caret: h=1em & w=2px  [{"h":14,"w":2,"fs":14}]
+  ok  english caret: translateY 0.2em  [matrix(1, 0, 0, 1, 0, 2.8)]
+  ok  english caret: sits at text tail (vertical center)  [{"left":775.765625,"lineRight":771.765625}]
+  wait ok: english reply finished
+
+RESULT: 61 passed / 0 failed

@@ -1,0 +1,97 @@
+# task-17 NetLog 证据（CDP Network，线上 food-nav.shiora.cc；URL 含 /api/favorites、/api/track 或 /api/ai）
+# fv_id=6671a946-a3a3-4cea-a95c-8c2bb1fb2134 · 时间 2026-10-07T10:13:57.316Z
+
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+PUT https://food-nav.shiora.cc/api/favorites/1
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: 919fab6680fc6591013e27a89fea176f
+  body: {"visitor_id":"6671a946-a3a3-4cea-a95c-8c2bb1fb2134"}
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+DELETE https://food-nav.shiora.cc/api/favorites/1
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: 919fab6680fc6591013e27a89fea176f
+  body: {"visitor_id":"6671a946-a3a3-4cea-a95c-8c2bb1fb2134"}
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: (pending)
+  content-type: -
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+POST https://food-nav.shiora.cc/api/ai/chat
+  status: 200
+  content-type: text/event-stream; charset=utf-8
+  X-Fav-Sign: -
+  body: {"messages":[{"role":"user","content":"推荐三个适合新手的烘焙配方，简短说明即可"}]}
+POST https://food-nav.shiora.cc/api/ai/chat
+  status: (pending)
+  content-type: -
+  X-Fav-Sign: -
+  body: {"messages":[{"role":"user","content":"推荐三个适合新手的烘焙配方，简短说明即可"},{"role":"assistant","content":"1. **巧克力曲奇**：简单易做，口感香脆，适合烘焙新手。\n2. **香蕉松饼**：材料易得，制作过程简单，适合初学者。\n3. **柠檬蛋糕**：酸甜可口，制作步骤清晰，适合烘焙入门者尝试。"},{"role":"user","content":"请写一段较长的家常红烧肉做法，步骤越详细越好"}]}
+PUT https://food-nav.shiora.cc/api/favorites/1
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: 919fab6680fc6591013e27a89fea176f
+  body: {"visitor_id":"6671a946-a3a3-4cea-a95c-8c2bb1fb2134"}
+DELETE https://food-nav.shiora.cc/api/favorites/1
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: 919fab6680fc6591013e27a89fea176f
+  body: {"visitor_id":"6671a946-a3a3-4cea-a95c-8c2bb1fb2134"}
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+GET https://food-nav.shiora.cc/api/favorites
+  status: 200
+  content-type: application/json; charset=utf-8
+  X-Fav-Sign: -
+  body: -
+
+# 说明：PUT/DELETE 均带 X-Fav-Sign(32-hex) 与 body.visitor_id=fv_id；
+#       GET /api/favorites 为初始化同步；/api/ai/chat 为 GLM SSE 流式；
+#       全程无 /api/track/favorite（M9 停用防双计）；测毕收藏全部取消还原。

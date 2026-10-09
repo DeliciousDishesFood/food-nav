@@ -1,0 +1,25 @@
+/**
+ * M5 · 分类切换过渡动画（新建文件：index.css 是红线禁改，动画走独立 CSS）
+ * 仅在 HomePage 分组容器 key={activeCategoryKey} 变化（即切换分类）时触发；
+ * 搜索过滤不换 key，因此打字不会闪。
+ */
+@keyframes food-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-fade {
+  animation: food-fade-up 0.18s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-fade {
+    animation: none;
+  }
+}

@@ -1,0 +1,412 @@
+# task-18 · 线上 check_logs 证据 · 2026-10-07T13:13:26.605Z
+# GET /api/check/logs?limit=40（Bearer）
+{
+  "ok": true,
+  "data": {
+    "list": [
+      {
+        "id": 272,
+        "siteId": 6,
+        "siteName": "君之烘焙",
+        "ok": true,
+        "statusCode": 412,
+        "durationMs": 1680,
+        "note": "HTTP 412（GET，HEAD 412）（站点可达）",
+        "checkedAt": "2026-10-07 13:13:23.944"
+      },
+      {
+        "id": 271,
+        "siteId": 22,
+        "siteName": "京东生鲜",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 505,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:22.724"
+      },
+      {
+        "id": 270,
+        "siteId": 16,
+        "siteName": "星巴克中国",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1008,
+        "note": "HTTP 200（GET，HEAD 404）",
+        "checkedAt": "2026-10-07 13:13:22.665"
+      },
+      {
+        "id": 269,
+        "siteId": 8,
+        "siteName": "Tinrry 甜悦家",
+        "ok": false,
+        "statusCode": 526,
+        "durationMs": 774,
+        "note": "HTTP 526（GET，HEAD 526）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）",
+        "checkedAt": "2026-10-07 13:13:22.362"
+      },
+      {
+        "id": 268,
+        "siteId": 2,
+        "siteName": "豆果美食",
+        "ok": true,
+        "statusCode": 403,
+        "durationMs": 601,
+        "note": "HTTP 403（GET，HEAD 403）（反爬拦截但站点可达）",
+        "checkedAt": "2026-10-07 13:13:22.182"
+      },
+      {
+        "id": 267,
+        "siteId": 19,
+        "siteName": "蜜雪冰城",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 569,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:22.150"
+      },
+      {
+        "id": 266,
+        "siteId": 9,
+        "siteName": "甜品实验室",
+        "ok": false,
+        "statusCode": 530,
+        "durationMs": 6,
+        "note": "HTTP 530（GET，HEAD 530）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）",
+        "checkedAt": "2026-10-07 13:13:21.585"
+      },
+      {
+        "id": 265,
+        "siteId": 20,
+        "siteName": "盒马鲜生",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 2325,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:21.069"
+      },
+      {
+        "id": 264,
+        "siteId": 23,
+        "siteName": "本来生活",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1526,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:20.328"
+      },
+      {
+        "id": 263,
+        "siteId": 12,
+        "siteName": "饿了么",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1262,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:20.208"
+      },
+      {
+        "id": 262,
+        "siteId": 28,
+        "siteName": "本地生活",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 584,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:19.193"
+      },
+      {
+        "id": 261,
+        "siteId": 10,
+        "siteName": "冰淇淋星球",
+        "ok": false,
+        "statusCode": 530,
+        "durationMs": 6,
+        "note": "HTTP 530（GET，HEAD 530）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）",
+        "checkedAt": "2026-10-07 13:13:18.872"
+      },
+      {
+        "id": 260,
+        "siteId": 21,
+        "siteName": "叮咚买菜",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1211,
+        "note": "HTTP 200（GET，HEAD 405）",
+        "checkedAt": "2026-10-07 13:13:18.801"
+      },
+      {
+        "id": 259,
+        "siteId": 14,
+        "siteName": "麦当劳",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 225,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:18.735"
+      },
+      {
+        "id": 258,
+        "siteId": 1,
+        "siteName": "下厨房",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1086,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:18.681"
+      },
+      {
+        "id": 257,
+        "siteId": 26,
+        "siteName": "茶百科",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 949,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:18.536"
+      },
+      {
+        "id": 256,
+        "siteId": 13,
+        "siteName": "肯德基",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 855,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:18.437"
+      },
+      {
+        "id": 255,
+        "siteId": 3,
+        "siteName": "美食杰",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1520,
+        "note": "HTTP 200（GET，HEAD 400）",
+        "checkedAt": "2026-10-07 13:13:17.022"
+      },
+      {
+        "id": 254,
+        "siteId": 27,
+        "siteName": "朴朴超市",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 752,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:16.164"
+      },
+      {
+        "id": 253,
+        "siteId": 25,
+        "siteName": "咖啡沙龙",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 498,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:15.767"
+      },
+      {
+        "id": 252,
+        "siteId": 7,
+        "siteName": "烘焙帮",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 839,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:15.730"
+      },
+      {
+        "id": 251,
+        "siteId": 17,
+        "siteName": "喜茶",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 434,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:15.415"
+      },
+      {
+        "id": 250,
+        "siteId": 18,
+        "siteName": "奈雪的茶",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 763,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:15.343"
+      },
+      {
+        "id": 249,
+        "siteId": 11,
+        "siteName": "美团外卖",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 391,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:15.202"
+      },
+      {
+        "id": 248,
+        "siteId": 5,
+        "siteName": "日日煮",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 334,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:14.912"
+      },
+      {
+        "id": 247,
+        "siteId": 15,
+        "siteName": "瑞幸咖啡",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 234,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:14.818"
+      },
+      {
+        "id": 246,
+        "siteId": 4,
+        "siteName": "心食神",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 162,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:14.739"
+      },
+      {
+        "id": 245,
+        "siteId": 6,
+        "siteName": "君之烘焙",
+        "ok": true,
+        "statusCode": 412,
+        "durationMs": 2605,
+        "note": "HTTP 412（GET，HEAD 412）（站点可达）",
+        "checkedAt": "2026-10-07 13:13:13.736"
+      },
+      {
+        "id": 244,
+        "siteId": 22,
+        "siteName": "京东生鲜",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 3861,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:11.976"
+      },
+      {
+        "id": 243,
+        "siteId": 16,
+        "siteName": "星巴克中国",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 3612,
+        "note": "HTTP 200（GET，HEAD 404）",
+        "checkedAt": "2026-10-07 13:13:11.728"
+      },
+      {
+        "id": 242,
+        "siteId": 19,
+        "siteName": "蜜雪冰城",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 2683,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:11.422"
+      },
+      {
+        "id": 241,
+        "siteId": 2,
+        "siteName": "豆果美食",
+        "ok": true,
+        "statusCode": 403,
+        "durationMs": 1666,
+        "note": "HTTP 403（GET，HEAD 403）（反爬拦截但站点可达）",
+        "checkedAt": "2026-10-07 13:13:11.062"
+      },
+      {
+        "id": 240,
+        "siteId": 8,
+        "siteName": "Tinrry 甜悦家",
+        "ok": false,
+        "statusCode": 526,
+        "durationMs": 1208,
+        "note": "HTTP 526（GET，HEAD 526）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）",
+        "checkedAt": "2026-10-07 13:13:09.326"
+      },
+      {
+        "id": 239,
+        "siteId": 9,
+        "siteName": "甜品实验室",
+        "ok": false,
+        "statusCode": 530,
+        "durationMs": 547,
+        "note": "HTTP 530（GET，HEAD 530）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）",
+        "checkedAt": "2026-10-07 13:13:08.663"
+      },
+      {
+        "id": 238,
+        "siteId": 12,
+        "siteName": "饿了么",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 4749,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:07.615"
+      },
+      {
+        "id": 237,
+        "siteId": 10,
+        "siteName": "冰淇淋星球",
+        "ok": false,
+        "statusCode": 530,
+        "durationMs": 1105,
+        "note": "HTTP 530（GET，HEAD 530）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）",
+        "checkedAt": "2026-10-07 13:13:05.615"
+      },
+      {
+        "id": 236,
+        "siteId": 23,
+        "siteName": "本来生活",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 4336,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:04.792"
+      },
+      {
+        "id": 235,
+        "siteId": 20,
+        "siteName": "盒马鲜生",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 3900,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:04.463"
+      },
+      {
+        "id": 234,
+        "siteId": 28,
+        "siteName": "本地生活",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 4079,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:04.436"
+      },
+      {
+        "id": 233,
+        "siteId": 14,
+        "siteName": "麦当劳",
+        "ok": true,
+        "statusCode": 200,
+        "durationMs": 1675,
+        "note": "HTTP 200",
+        "checkedAt": "2026-10-07 13:13:02.801"
+      }
+    ],
+    "total": 272,
+    "limit": 40,
+    "offset": 0
+  }
+}

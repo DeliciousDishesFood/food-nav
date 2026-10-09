@@ -1,0 +1,25 @@
+[health] status=200 body={"ok":true,"data":{"db":"up","time":"2026-10-03T12:07:36.424Z"}}
+[categories] status=200 ok=True count=5
+  - 1 home-cooking 家常菜谱 cooking-pot sortOrder=0
+  - 2 baking-dessert 烘焙甜点 cake sortOrder=1
+  - 3 delivery 外卖到家 bike sortOrder=2
+  - 4 drinks 茶饮咖啡 coffee sortOrder=3
+  - 5 groceries 生鲜食材 carrot sortOrder=4
+[sites] status=200 ok=True count=23
+  first={"id":1,"categoryId":1,"categoryKey":"home-cooking","name":"下厨房","desc":"最受欢迎的中文菜谱社区，海量家常做法","url":"https://www.xiachufang.com/","icon":"cooking-pot","coverImg":"/covers/noodle.svg","tag":"热门","sortOrder":0,"status":"active","heatScore":0}
+  last={"id":23,"categoryId":5,"categoryKey":"groceries","name":"本来生活","desc":"全球精品食材，品质生鲜餐桌管家","url":"https://www.benlai.com/","icon":"wheat","coverImg":"/covers/fruit.svg","tag":"","sortOrder":3,"status":"active","heatScore":0}
+  names=下厨房 | 豆果美食 | 美食杰 | 心食谱 | 日日煮 | 君之烘焙 | 烘焙帮 | Tinrry 甜悦家 | 甜品实验室 | 冰淇淋星球 | 美团外卖 | 饿了么 | 肯德基 | 麦当劳 | 瑞幸咖啡 | 星巴克中国 | 喜茶 | 奈雪的茶 | 蜜雪冰城 | 盒马鲜生 | 叮咚买菜 | 京东生鲜 | 本来生活
+  missingFields=none
+  coverImgs=/covers/noodle.svg , /covers/dish.svg , /covers/noodle.svg , /covers/dish.svg ,  , /covers/dessert.svg , /covers/cake.svg , /covers/cake.svg , /covers/dessert.svg , /covers/icecream.svg , /covers/burger.svg , /covers/delivery.svg , /covers/burger.svg , /covers/fries.svg , /covers/coffee.svg , /covers/coffee.svg , /covers/milktea.svg , /covers/milktea.svg , /covers/icecream.svg , /covers/market.svg , /covers/market.svg , /covers/fruit.svg , /covers/fruit.svg
+  tags=热门 ,  ,  ,  , 新品 , 推荐 , 口碑 ,  ,  ,  , 热门 ,  ,  ,  , 热门 ,  ,  , 新品 ,  , 热门 ,  ,  , 
+[sites?category=delivery] count=4 keys=delivery,delivery,delivery,delivery
+[sites?q=coffee-CJK] count=1 names=瑞幸咖啡
+[sites?sort=heat] count=23 firstSortOrder=0 heat=0
+[sites/1] status=200 body={"ok":true,"data":{"id":1,"categoryId":1,"categoryKey":"home-cooking","name":"下厨房","desc":"最受欢迎的中文菜谱社区，海量家常做法","url":"https://www.xiachufang.com/","icon":"cooking-pot","coverImg":"/covers/noodle.svg","tag":"热门","sortOrder":0,"status":"active","heatScore":0}}
+[sites/9999] status=404 body={"ok":false,"error":{"code":"not_found","message":"站点不存在"}}
+[sites/abc] status=400 body={"ok":false,"error":{"code":"invalid_id","message":"站点 id 必须是正整数"}}
+[cors localhost:5174] status=200 ACAO=http://localhost:5174
+[cors evil.example.com] ACAO=(none)
+[GET /] status=200 hasRoot=True
+[GET /api/_lib/db] status=200
+[GET /api/categories/1] status=200

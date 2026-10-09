@@ -1,0 +1,61 @@
+# task-18 · 线上全量分级验收日志 · 2026-10-07T13:13:26.658Z
+# https://food-nav.shiora.cc · 部署后手动触发全量检测
+
+[login] ok · https://food-nav.shiora.cc
+[snapshot.before] total=27 {"active":24,"checking":0,"broken":3}
+  broken 前置: #8 Tinrry 甜悦家 https://www.tinrry.com/
+  broken 前置: #9 甜品实验室 https://www.dessertlab.cn/
+  broken 前置: #10 冰淇淋星球 https://www.icecreamplanet.cn/
+
+[run] pass 1 · POST /api/check/run 全量（batch=4, since 循环）
+  pass 1 round 1: checked=10 total=27 remaining=17 active=10 broken=0 checking=0 elapsed=4035ms
+  pass 1 round 2: checked=10 total=17 remaining=7 active=9 broken=1 checking=0 elapsed=8736ms
+  pass 1 round 3: checked=7 total=7 remaining=0 active=5 broken=2 checking=0 elapsed=5771ms
+  pass 1 后快照: {"active":24,"checking":0,"broken":3}
+
+[run] pass 2 · POST /api/check/run 全量（batch=4, since 循环）
+  pass 2 round 1: checked=10 total=27 remaining=17 active=10 broken=0 checking=0 elapsed=2602ms
+  pass 2 round 2: checked=10 total=17 remaining=7 active=9 broken=1 checking=0 elapsed=3641ms
+  pass 2 round 3: checked=7 total=7 remaining=0 active=5 broken=2 checking=0 elapsed=2513ms
+  pass 2 后快照: {"active":24,"checking":0,"broken":3}
+
+[assert]
+  ok  全量跑完 remaining=0
+[snapshot.after] total=27 {"active":24,"checking":0,"broken":3}（期望 active=24 / broken=3 / checking=0）
+  ok  豆果美食 → active（403 误判复活）
+  ok  B站 → active（403 误判复活）
+  ok  Tinrry 甜悦家 → 保持 broken（真死链）
+  ok  甜品实验室 → 保持 broken（真死链）
+  ok  冰淇淋星球 → 保持 broken（真死链）
+  ok  线上 active = 24（实际 24）
+  ok  线上 broken = 3（实际 3，应为 3 个真死链）
+  ok  无 checking 残留（实际 0）
+  ok  主站 /api/sites 只回 active（24 条 == active 数 24）
+  ok  任务前 5 个 broken 站全部进入候选被重测（5/5）
+  被重测的原 broken 站 id: 2, 6, 8, 9, 10
+
+[check_logs] HTTP 200 total=272，最近 20 条（倒序）
+  2026-10-07 13:13:23.944 #6 君之烘焙 ok=true code=412 1680ms note=HTTP 412（GET，HEAD 412）（站点可达）
+  2026-10-07 13:13:22.724 #22 京东生鲜 ok=true code=200 505ms note=HTTP 200
+  2026-10-07 13:13:22.665 #16 星巴克中国 ok=true code=200 1008ms note=HTTP 200（GET，HEAD 404）
+  2026-10-07 13:13:22.362 #8 Tinrry 甜悦家 ok=false code=526 774ms note=HTTP 526（GET，HEAD 526）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）
+  2026-10-07 13:13:22.182 #2 豆果美食 ok=true code=403 601ms note=HTTP 403（GET，HEAD 403）（反爬拦截但站点可达）
+  2026-10-07 13:13:22.150 #19 蜜雪冰城 ok=true code=200 569ms note=HTTP 200
+  2026-10-07 13:13:21.585 #9 甜品实验室 ok=false code=530 6ms note=HTTP 530（GET，HEAD 530）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）
+  2026-10-07 13:13:21.069 #20 盒马鲜生 ok=true code=200 2325ms note=HTTP 200
+  2026-10-07 13:13:20.328 #23 本来生活 ok=true code=200 1526ms note=HTTP 200
+  2026-10-07 13:13:20.208 #12 饿了么 ok=true code=200 1262ms note=HTTP 200
+  2026-10-07 13:13:19.193 #28 本地生活 ok=true code=200 584ms note=HTTP 200
+  2026-10-07 13:13:18.872 #10 冰淇淋星球 ok=false code=530 6ms note=HTTP 530（GET，HEAD 530）（Cloudflare 边缘错误，源站不可达，连续 2 次判失效）
+  2026-10-07 13:13:18.801 #21 叮咚买菜 ok=true code=200 1211ms note=HTTP 200（GET，HEAD 405）
+  2026-10-07 13:13:18.735 #14 麦当劳 ok=true code=200 225ms note=HTTP 200
+  2026-10-07 13:13:18.681 #1 下厨房 ok=true code=200 1086ms note=HTTP 200
+  2026-10-07 13:13:18.536 #26 茶百科 ok=true code=200 949ms note=HTTP 200
+  2026-10-07 13:13:18.437 #13 肯德基 ok=true code=200 855ms note=HTTP 200
+  2026-10-07 13:13:17.022 #3 美食杰 ok=true code=200 1520ms note=HTTP 200（GET，HEAD 400）
+  2026-10-07 13:13:16.164 #27 朴朴超市 ok=true code=200 752ms note=HTTP 200
+  2026-10-07 13:13:15.767 #25 咖啡沙龙 ok=true code=200 498ms note=HTTP 200
+  ok  分级 note 已生效（2/40 条）
+  ok  日志中已无「可疑档」旧文案
+
+RESULT: 13 passed / 0 failed

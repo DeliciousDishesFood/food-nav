@@ -1,0 +1,23 @@
+# 食光导航 · 链接检测定时任务（M3）
+#
+# 为什么是独立 Worker 而不是 Pages 的 cron：
+#   Cloudflare Pages 不支持 scheduled/cron 触发器（实测确认：
+#   - Pages Functions API 参考只有 onRequest*，没有 scheduled
+#   - Pages 的 wrangler 配置键里没有 crons / triggers
+#   - 官方 Cron Triggers 文档的平台对比表明确：Pages = No，Workers = Yes
+#   因此用一个只负责定时的 Worker（cron/）复用 functions/api/_lib/checker.js，
+#   每天 UTC 04:00（北京时间 12:00）跑一轮，内部直调 runChecks，不走 HTTP 鉴权。
+#
+# 部署：npx wrangler deploy --config cron/wrangler.toml
+# 确认：npx wrangler triggers status --config cron/wrangler.toml
+name = "food-nav-link-check-cron"
+main = "src/index.js"
+compatibility_date = "2026-10-04"
+
+[triggers]
+crons = ["0 4 * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "food-nav-db"
+database_id = "b3f7564d-03d5-4ce0-b3ff-a252878dac96"

@@ -1,0 +1,119 @@
+task-20 · M10 部署上线 · 线上 CDP 回归日志
+base: https://food-nav.shiora.cc
+time: 2026-10-07T16:32:45.495Z [done]
+
+  ok  probe 1 GET / -> 200
+  ok  probe 2 /api/health -> ok:true db:up
+  ok  probe 3 GET /ask -> 200 (SPA fallback)
+  ok  probe 4 GET /api/sites?status=active -> 200 envelope
+  ok  主站卡片渲染（收藏心按钮就绪）
+  ok  API active 数量 > 0
+  ok  线上首页无降级提示条
+  ok  懒加载渲染卡片数 == API active 数
+  ok  nav-cache 写入且新鲜（M6）
+  ok  shot 06-home-regression.png: pixel probe shows expected content
+  ok  搜索「烘焙」过滤生效（结果收窄 + 计数文案）
+  ok  清空搜索恢复全部卡片
+  ok  音乐播放器可展开（播放/上一首/下一首/进度条）
+  ok  音乐播放器可收起
+  ok  基线站点热度捕获
+  ok  收藏点击发送 PUT /api/favorites/{id}（线上）
+  ok  PUT -> 200
+  ok  aria-pressed 变 true
+  ok  收藏写入 localStorage
+  ok  收藏 +1 -> favorite_count+1 & heat_score+5
+  ok  刷新后收藏保留（本地 + 服务端）
+  ok  取消收藏发送 DELETE
+  ok  取消后服务端收藏列表为空
+  ok  取消后热度还原基线（不污染线上数据）
+  ok  /ask 工作台渲染（樱见 + composer）
+  ok  推荐提问: 发送按钮点击
+  ok  推荐提问: AI 流式回答完成
+  ok  推荐卡片渲染（主体 = 追问按钮）
+  ok  角落按钮 target=_blank + rel=noopener
+  ok  角落按钮触控 ≥40×40
+  ok  角落按钮 aria-label=打开…站点
+  ok  卡片主体是 <button>（不再整卡外链）
+  ok  卡片主体 aria-label=关于…继续追问
+  ok  点击卡片主体
+  ok  对话流追加带站点上下文的追问消息
+  ok  追问问句与手输消息同构（用户气泡 +1）
+  ok  shot 01-ask-recommend-ask.png: pixel probe shows expected content
+  ok  AI 流式回答该追问（复用发送链路）
+  ok  对话态 header 出现「返回工作台」
+  ok  生成结束后返回按钮可用
+  ok  返回工作台点击
+  ok  回到工作台（对话流退出）
+  ok  会话进「最近会话」（storage sessions ≥1）
+  ok  会话内容含站点追问消息
+  ok  面板出现该会话行（含删除按钮）
+  ok  shot 02-ask-back-workspace.png: pixel probe shows expected content
+  ok  点击「继续对话」恢复
+  ok  恢复的对话含追问问句（记忆链路）
+  ok  返回工作台（分离当前会话）
+  ok  第二会话: 发送按钮点击
+  ok  第二会话: AI 流式回答完成
+  ok  第二会话后返回工作台
+  ok  两条会话并存（面板 2 行 / storage 2 条）
+  ok  删除按钮触控目标 ≥40×40
+  ok  删一条 -> 面板与 storage 同步（2→1）
+  ok  删空 -> 面板空态引导
+  ok  删空 -> storage 键移除
+  ok  注入会话后恢复（bootstrap 进对话态）
+  ok  返回工作台可见 1 行
+  ok  面板 1 行（删除按钮就绪）
+  ok  主站路由外壳带 route-fade 动画
+  ok  动画时长 0.18s
+  ok  过渡不遮挡交互（pointer-events=auto）
+  ok  /ask 路由同样带 route-fade 0.18s
+  ok  reduced-motion：路由动画关闭
+  ok  reduced-motion：不生成花瓣
+  ok  单击生成 3-5 片花瓣
+  ok  花瓣层 pointer-events:none + aria-hidden
+  ok  300ms 限频：同刻连点花瓣数不增加
+  ok  花瓣 ~1s 后消失并移除 DOM
+  ok  散花不拦截默认行为（问问樱见入口跳转正常）
+  ok  主站暗色切换生效
+  ok  暗色下 ask-panel 生效
+  ok  暗色下返回工作台可见
+  ok  暗色下删除按钮有可见颜色
+  ok  切回亮色
+  ok  主站 375 无横向溢出
+  ok  /ask 恢复注入会话（对话态）
+  ok  /ask 375 无横向溢出（对话态）
+  ok  header 按钮组在视口内（返回主站|返回工作台 … |清空）
+  ok  返回工作台按钮 ≥36×36
+  ok  shot 03-mobile-375.png: pixel probe shows expected content
+  ok  375 返回工作台
+  ok  375 最近会话删除按钮 ≥40×40
+  ok  工作台 375 无横向溢出
+  ok  admin 登录 + 仪表盘渲染（站点总数）
+  ok  热度榜渲染（Top10 行）
+  ok  站点管理表格渲染数据行（只读，行数 ≥10）
+  ok  主题还原亮色
+  ok  服务端收藏列表为空（取消还原）
+  ok  目标站点热度 == 基线（无污染）
+  ok  本地 ask-history / admin token / favorites 已清理
+
+# page visible + timers not throttled
+# active sites (API) = 24
+# screenshot → 06-home-regression.png
+# favorite target = 下厨房
+# 推荐提问 回答开头: 为您推荐以下烘焙网站：1. 君之烘焙：经典家庭烘焙博客，配方稳定靠谱，您可以在这里找到各种烘焙配方和技巧。网站链接：[君之烘焙](https
+# screenshot → 01-ask-recommend-ask.png
+# 追问回答开头: 「君之烘焙」是一个专注于烘焙领域的站点，它的特色如下：
+
+1. 经验丰富的烘焙达人：该站点由烘焙达人君之创建，他拥有丰富的烘焙经验和知识，提
+# screenshot → 02-ask-back-workspace.png
+# 第二会话 回答开头: 舒芙蕾塌的原因可能有以下几点：
+
+1. 发酵时间不够：舒芙蕾需要充分发酵，如果发酵时间不够，面糊中的气体不足，烤出来的舒芙蕾容易塌陷。
+2.
+# screenshot → 04-sakura-burst.png
+# screenshot → 05-dark.png
+# screenshot → 03-mobile-375.png
+# admin logged in (live)
+# admin 站点表：可见行数=27 · 共 27 个站点（未点击任何写操作按钮）
+# final fv_id=53e7830b-512b-473b-a284-4c9da99af3c4
+
+RESULT: 92 passed / 0 failed

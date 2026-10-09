@@ -1,0 +1,34 @@
+# task-18 · 线上主站回归 + 截图证据 · 2026-10-07T13:20:08.556Z
+# https://food-nav.shiora.cc · CDP http://127.0.0.1:9222
+
+  ok  GET /api/sites?status=active = 24
+  ok  首页卡片渲染 == active 数（24/24）
+  ok  首页含豆果美食（403 误判已复活）
+  ok  首页含君之烘焙（B 站 403 误判已复活）
+  ok  3 个真死链已隐藏（不在首页）
+  ok  无降级条（数据加载失败/本地快照）
+  ok  shot 01-live-home-24cards.png: pixel probe
+  ok  搜索「豆」过滤出结果（< 全量且 ≥1）
+  ok  清空搜索恢复全量卡片
+  ok  切到「烘焙甜点」渲染出卡片
+  ok  切回「全部」恢复 24 卡片
+  ok  点击爱心 → aria-pressed=true
+  ok  再点一次取消收藏（还原，不留脏数据）
+  ok  主题切换 → html.dark
+  ok  主题还原为亮色
+  ok  375 无横向溢出
+  ok  shot 02-live-mobile-375.png: pixel probe
+  ok  管理端登录成功
+  ok  进入「检测中心」
+  ok  最近检测日志有数据
+  ok  日志含新分级 note「反爬拦截但站点可达」
+  ok  日志含新分级 note「源站不可达」
+  ok  日志已无「可疑档」旧文案
+
+RESULT: 23 passed / 0 failed
+
+# notes
+page visible + timers not throttled
+screenshot → 01-live-home-24cards.png
+screenshot → 02-live-mobile-375.png
+screenshot → 03-admin-check-logs.png

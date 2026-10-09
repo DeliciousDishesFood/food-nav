@@ -1,0 +1,43 @@
+# task-21 · M9-T3 豁免机制单测日志 · 2026-10-08T15:53:23.116Z
+# 覆盖 pickTargets 三路径排除 / skippedSiteIds / DTO / 校验 / run.js 语义 / migration 006 / admin 前端 / 新站真实检测
+
+  ok  A. 默认全量路径排除豁免站
+  ok  A. 默认全量路径仍含 broken（复活机制不回归）
+  ok  A. since 路径（cron/手动全量）排除豁免站
+  ok  A. since 路径仍按 last_checked_at 最久优先
+  ok  A. 单站路径排除豁免站
+  ok  A. 单站路径仍不过滤 status（broken 可被单站救回）
+  ok  B. skippedSiteIds 命中豁免站 → [8]
+  ok  B. skippedSiteIds SQL 过滤 skip_check = 1
+  ok  B. 空/非法 siteIds → []
+  ok  B. 非豁免站 → []（走正常检测）
+  ok  C. toSiteDto skip_check=1 → skipCheck true
+  ok  C. toSiteDto skip_check=0 → skipCheck false
+  ok  C. toSiteDto 缺列 → skipCheck false（向后兼容）
+  ok  D. 创建（默认 false）→ skipCheck=0
+  ok  D. 创建（勾选）→ skipCheck=1
+  ok  D. 创建不传 skipCheck → 不写入（DB 默认 0）
+  ok  D. 局部更新 skipCheck=true → 1
+  ok  D. 非法 skipCheck 类型 → 校验失败
+  ok  E. 美食天下 单站检测 → active
+       https://www.meishichina.com/ code=403 HTTP 403（GET，HEAD 403） → active
+  ok  E. 好豆网 单站检测 → active
+       https://www.haodou.com/ code=200 HTTP 200 → active
+  ok  F. run.js 引入 skippedSiteIds
+  ok  F. run.js 返回 {skipped:true, skippedIds}
+  ok  F. checker.js 文件头写明 M9-T3 豁免机制
+  ok  F. checker.js 导出 skippedSiteIds
+  ok  G. 006 加列 skip_check
+  ok  G. 006 删 id 9/10 并级联四表
+  ok  G. 006 插入 29 美食天下
+  ok  G. 006 插入 30 好豆网
+  ok  G. 006 新站 status=active 且不自动打标
+  ok  G. 006 新站统计行 29/30
+  ok  G. 006 tinrry 豁免 + active + fail_count 清零
+  ok  H. 表单含「跳过自动检测」checkbox（aria-label）
+  ok  H. 表单提交 payload 含 skipCheck
+  ok  H. 表单编辑回显 initial.skipCheck
+  ok  H. 站点表格显示豁免徽标
+  ok  H. 单站检测跳过提示
+
+RESULT: 36 passed / 0 failed

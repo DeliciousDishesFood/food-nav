@@ -1,0 +1,25 @@
+﻿
+ 鉀咃笍 wrangler 4.148.0
+鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+node.exe : [33m鈻?[43;33m[[43;30mWARNING[43;33m][0m [1mWarning: Your working directory is a git repo and has uncom
+mitted changes[0m
+所在位置 行:1 字符: 1
++ & "D:\node.js/node.exe" "D:\node.js/node_modules/npm/bin/npx-cli.js"  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33m鈻?[43;33m...ted changes[0m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+  To silence this warning, pass in --commit-dirty=true
+
+
+鉁?Compiled Worker successfully
+Uploading... (14/19)
+Uploading... (16/19)
+Uploading... (17/19)
+Uploading... (19/19)
+鉁?Success! Uploaded 5 files (14 already uploaded) (5.23 sec)
+
+鉁?Uploading Functions bundle
+馃寧 Deploying...
+鉁?Deployment complete! Take a peek over at https://c1bed251.food-nav-5eb.pages.dev

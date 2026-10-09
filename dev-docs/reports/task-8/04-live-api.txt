@@ -1,0 +1,19 @@
+[health] 200 {"ok":true,"data":{"db":"up","time":"2026-10-03T12:28:37.854Z"}}
+[categories] 200 ok=true count=5
+  1 home-cooking 家常菜谱 cooking-pot sortOrder=0
+  2 baking-dessert 烘焙甜点 cake sortOrder=1
+  3 delivery 外卖到家 bike sortOrder=2
+  4 drinks 茶饮咖啡 coffee sortOrder=3
+  5 groceries 生鲜食材 carrot sortOrder=4
+[sites] 200 ok=true count=23 ctype=application/json; charset=utf-8
+  names=下厨房 | 豆果美食 | 美食杰 | 心食谱 | 日日煮 | 君之烘焙 | 烘焙帮 | Tinrry 甜悦家 | 甜品实验室 | 冰淇淋星球 | 美团外卖 | 饿了么 | 肯德基 | 麦当劳 | 瑞幸咖啡 | 星巴克中国 | 喜茶 | 奈雪的茶 | 蜜雪冰城 | 盒马鲜生 | 叮咚买菜 | 京东生鲜 | 本来生活
+  missingFields=none
+  groupedOrder=true
+[sites?category=delivery] count=4 keys=delivery,delivery,delivery,delivery
+[sites?q=coffee] count=1 names=瑞幸咖啡
+[sites?sort=heat] count=23 first=下厨房
+[sites/1] 200 {"ok":true,"data":{"id":1,"categoryId":1,"categoryKey":"home-cooking","name":"下厨房","desc":"最受欢迎的中文菜谱社区，海量家常做法","url":"https://www.xiachufang.com/","icon":"cooking-pot","coverImg":"/covers/noodle.svg","tag":"热门","sortOrder":0,"status":"active","heatScore":0}}
+[sites/9999] 404 {"ok":false,"error":{"code":"not_found","message":"站点不存在"}}
+[sites/abc] 400 {"ok":false,"error":{"code":"invalid_id","message":"站点 id 必须是正整数"}}
+[cors dev origin] status=200 ACAO=http://localhost:5174
+[GET /] 200 ctype=text/html; charset=utf-8

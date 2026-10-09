@@ -1,0 +1,291 @@
+# task-16 NetLog 证据（CDP Network 事件，URL 含 /api/favorites 或 /api/track）
+# fv_id=051ea400-0020-4455-8ae9-e9c4d611f5c4 · 时间 2026-10-06T15:56:01.845Z
+
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+PUT http://127.0.0.1:8788/api/favorites/1
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+DELETE http://127.0.0.1:8788/api/favorites/1
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+DELETE http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+PUT http://127.0.0.1:8788/api/favorites/1
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+DELETE http://127.0.0.1:8788/api/favorites/1
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+POST http://127.0.0.1:8788/api/track/click
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: {"url":"https://www.xiachufang.com/"}
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 400
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"attacker-id"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 401
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 401
+  X-Fav-Sign: 00000000000000000000000000000000
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+PUT http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+DELETE http://127.0.0.1:8788/api/favorites/2
+  status: 200
+  X-Fav-Sign: e1340d99e2d9380a7d8b8d5a9bb09d6a
+  Sec-Fetch-Site: -
+  body: {"visitor_id":"051ea400-0020-4455-8ae9-e9c4d611f5c4"}
+GET http://127.0.0.1:8788/api/favorites
+  status: 200
+  X-Fav-Sign: -
+  Sec-Fetch-Site: -
+  body: -
+
+# 说明：PUT/DELETE 均带 X-Fav-Sign(32-hex) 与 body.visitor_id=fv_id；
+#       GET /api/favorites 为初始化同步；全程无 /api/track/favorite（M9 停用防双计）。

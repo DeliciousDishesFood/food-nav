@@ -1,0 +1,6 @@
+home=200
+health=200
+healthBody={"ok":true,"data":{"db":"up","time":"2026-10-07T16:06:33.053Z"}}
+ask=200
+sites=200
+newBundle=    <script type="module" crossorigin src="/assets/index-BvkBz1d2.js"></script>

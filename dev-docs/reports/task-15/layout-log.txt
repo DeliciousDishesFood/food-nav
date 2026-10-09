@@ -1,0 +1,143 @@
+
+[验收4] 主站入口：SVG 图标 + 问问樱见 + 贴纸样式 + 进 /ask
+  wait ok: home cards
+  ok  entry button exists (问问樱见)  [问问樱见]
+  ok  entry no ✨ emoji (SVG instead)
+  ok  entry text = 问问樱见  [问问樱见]
+  ok  entry sakura svg h4 w4 stroke-pink  [{"w":16,"h":16,"stroke":"rgb(255, 143, 177)","fill":"none","aria":"true"}]
+  ok  entry svg = 5 petals + center dot  [5]
+  ok  entry sticker border-2 kept  [2px]
+  ok  entry sticker shadow kept  [inline-flex items-center gap-1.5 rounded-full border-2 borde]
+  ok  entry radius round kept  [9999px]
+  wait ok: entry → #/ask
+  ok  entry click → /ask composer
+
+[验收1+3] 工作台 grid / 紧密结合 / header 居中 + 图标按钮
+  wait ok: composer
+  ok  workspace = grid (3 cols @lg)  [grid/362.656px 362.656px 362.656px]
+  ok  workspace gap-4 (16px)  [16px]
+  ok  workspace px-4 pt-4 pb-4  [16px/16px/16px]
+  ok  workspace overflow-y-auto  [auto]
+  ok  workspace max-w-6xl (1152px)  [1152px]
+  ok  workspace no scroll on desktop (fits)  [{"sh":{"w":1152,"h":756,"bottom":822}}]
+  ok  aside removed entirely
+  ok  left card span 2 / ~2-3 width  [{"l":741,"r":363,"span":"span 2 / span 2"}]
+  ok  left card rounded-[24px] p-6  [{"w":741,"h":724,"bottom":806,"radius":"24px","pad":"24px","span":"span 2 / span 2"}]
+  ok  right col span 1 + gap-4  [16px]
+  ok  tight: left card bottom ≈ grid bottom-16  [806 vs 806]
+  ok  tight: right col bottom ≈ grid bottom-16 (no loose blank)  [806 vs 806]
+  ok  right col = 今日美味 + 最近会话 (2 panels)  [["今日美味","最近会话"]]
+  ok  panels uniform rounded-[22px] p-3.5  [[{"title":"今日美味","radius":"22px","pad":"14px"},{"title":"最近会话","radius":"22px","pad":"14px"}]]
+  ok  今日美味 = 3 sites + hint  [3/点一下自动填进输入框]
+  ok  最近会话 no-history light guide  [最近会话聊聊今天想吃什么吧，问过的对话会在这里等你。]
+  ok  illustration h24 w36 migrated  [{"w":144,"h":96,"aria":"樱见插画"}]
+  ok  illustration aria renamed 樱见插画  [樱见插画]
+  ok  left card title = 樱见  [樱见]
+  ok  left card chips 3-4  [4]
+  ok  换一批灵感 kept
+  ok  greeting + brand desc kept  [["站内美食网站挖一挖，烘焙下厨的小问题也能问","饿了就先问问看"]]
+  ok  header divider element removed
+  ok  header capsule grid 3 cols  [grid/36px 1006px 36px]
+  ok  header capsule radius 20 / bg-70 / blur / mt-3 kept  [{"r":"20px","b":"rgba(255, 255, 255, 0.7)","m":"12px"}]
+  ok  header capsule spans content column 1120 @1440  [{"left":155,"w":1120}]
+  ok  header truly centered (mid cell vs capsule ≤1px)  [0]
+  ok  title 樱见 + text-center group  [樱见]
+  ok  title logo h6 gradient present  [{"w":24}]
+  ok  back btn aria-label=回到主站 icon-only 36px  [{"aria":"回到主站","text":"","w":36,"h":36,"svgs":1,"disabled":false}]
+  ok  clear btn aria-label=清空对话 icon-only 36px  [{"aria":"清空对话","text":"","w":36,"h":36,"svgs":1,"disabled":true}]
+  ok  clear btn disabled on empty workspace  [true]
+  ok  header no horizontal overflow  [{"sw":1118,"cw":1118}]
+  header metrics: {"mid":0,"text":14.99,"cols":"36px 1006px 36px"}
+  ok  换一批灵感 refreshes chips  [["深夜甜品灵感站","今天想看茶饮咖啡","烘焙名词小课堂","奶茶点单避雷指南"] => ["逛逛外卖到家","烤箱新手入门课","夏天解暑饮品单"]]
+  shot 01-workspace-empty.png
+  shot 03-header-centered-icons.png clip={"x":0,"y":0,"width":1440,"height":96}
+
+[验收2+8] 发消息 → 纯净单栏 / 推荐卡片 / 配色保留
+  ok  workspace chip click sends question
+  wait ok: chip reply finished
+  ok  reply stream completed
+  ok  workspace gone after first message  [{"g":true,"a":true,"p":true}]
+  ok  chat = full-width single column (1120 @1440)  [1120]
+  ok  recommend cards rendered  [n=4 ["🛵美团外卖本地生活美食即时送达，品类齐","🛵饿了么餐饮外卖与到店服务，速度优先去","🛵肯德基炸鸡汉堡经典款，宅急送在家吃去"]]
+  ok  .ask-bubble-me gradient intact  [linear-gradient(135deg, rgb(255, 143, 177) 0%, rgb(255, 182, 205) 100%)]
+  ok  .ask-bubble-me white text intact  [rgb(255, 255, 255)]
+  ok  AI bubble warm white glass kept  [rgba(255, 255, 255, 0.78)]
+  ok  ask-page warm gradient kept  [linear-gradient(rgb(255, 245, 249) 0%, rgb(253, 247, 255) 52]
+  ok  message container pl-4 (16px)  [16px]
+  shot 02-chat-pure.png
+  ok  header clear btn enabled with messages  [false]
+
+[验收7] thumb 宽6px / right-1(4px) / 圆角 / 净距≈18px / 不足一屏+小屏隐藏
+  ok  native scrollbar hidden  [none]
+  ok  thumb visible when overflowing  [{"w":6,"h":518,"rightInset":4,"radius":"9999px"}]
+  ok  thumb w = 6px (w-1.5)  [6]
+  ok  thumb right inset = 4px (right-1)  [4]
+  ok  thumb rounded-full  [9999px]
+  ok  content↔thumb net gap ≈18px (16-20)  [18]
+  ok  content pl-4 pr-7 (16/28px)  [16px/28px]
+  shot 05-scrollbar-gap.png clip={"x":1040,"y":96,"width":320,"height":560}
+  ok  thumb drag scrolls  [{"ok":true,"before":0,"after":23}]
+  shot 06-small-screen-no-thumb.png
+  ok  thumb hidden: fits-one-screen(JS) + <1024px(CSS)  [{"fits":{"scrollable":false,"thumb":false},"small":{"scrollable":true,"thumb":true,"display":"none"}}]
+
+[验收9a] 发送 → 流式 → 停止
+  wait ok: stop button
+  ok  stop button during stream
+  wait ok: stopped state
+  ok  stop aborts → 已停止生成
+
+[验收11] 暗色：工作台 / header / 最近会话 / 输入条 token
+  ok  dark header capsule token  [rgba(36, 26, 51, 0.75) | rgba(255, 255, 255, 0.1)]
+  ok  dark icon btn token  [rgba(44, 33, 64, 0.85)]
+  ok  dark composer token  [rgba(44, 33, 64, 0.8)]
+  ok  dark page gradient kept  [linear-gradient(rgb(36, 26, 51) 0%, rgb(29, 21]
+  ok  dark workspace panels token  [[{"t":"站内美食网站挖一挖，烘焙下厨的小问题也能问","bg":"rgba(44, 33, 64, 0.8)"},{"t":"今日美味","bg":"rgba(44, 33, 64, 0.8)"},{"t":"最近会话","bg":"rgba(44, 33, 64, 0.8)"}]]
+
+[验收5] 聊几句 → 刷新恢复（气泡+滚到底）/ id 不撞 / 清空闭环
+  wait ok: history round 1
+  ok  history written to localStorage  [savedAt,messages]
+  ok  history payload = {savedAt, messages}  [["savedAt","messages"]]
+  wait ok: reload composer
+  ok  refresh restores conversation (bubbles back)  [2 vs 2]
+  ok  refresh restores content verbatim  [{"now":"推荐几个适合新手的烘焙网站","was":"推荐几个适合新手的烘焙网站"}]
+  ok  refresh lands on chat view (not workspace)
+  ok  restored conversation scrolled to bottom  [0/0]
+  wait ok: history round 2 (id check)
+  ok  new reply appended (count +2)  [4 vs 2]
+  ok  old bubbles untouched (no id collision)  [{"now":"推荐几个适合新手的烘焙网站","was":"推荐几个适合新手的烘焙网站"}]
+  ok  stored ids unique  [[1,2,3]]
+  ok  clear → back to workspace  [{"grid":true,"bubbles":0,"stored":null,"recent":"最近会话聊聊今天想吃什么吧，问过的对话会在这里等你。"}]
+  ok  clear → history removed  [null]
+  ok  clear → 最近会话 falls back to guide  [最近会话聊聊今天想吃什么吧，问过的对话会在这里等你。]
+
+[验收6] 有历史：上次聊到 + 继续上次对话（跨标签 storage 事件模拟）
+  wait ok: fresh workspace
+  ok  no history → light guide  [最近会话聊聊今天想吃什么吧，问过的对话会在这里等你。]
+  ok  storage event → 上次聊到 + 继续按钮  [最近会话上次聊到：有什么适合新手的烘焙网站推荐吗继续上次对话→]
+  ok  继续上次对话 → full history restored  [{"n":2,"grid":false}]
+  ok  resumed content verbatim  [有什么适合新手的烘焙网站推荐吗]
+  ok  resumed scrolled to bottom  [0/0]
+
+[验收9b-e] chips 点击提问 / ?q= 预填 / 回主站 / reduced-motion
+  ok  chips click sends question  [外卖到家急救包 vs 外卖到家急救包]
+  wait ok: chip reply
+  wait ok: home restored
+  ok  回到主站 (icon btn) works  [{"home":true,"atHome":true}]
+  wait ok: prefill composer
+  ok  ?q= 预填 kept  [有什么烘焙网站推荐]
+  ok  reduced-motion: ask-page drift animation off  [none]
+
+[验收12+截图4] 375：无横向溢出 / Composer safe-area / 工作台可滚动
+  wait ok: mobile composer
+  ok  375 no horizontal overflow  [375/375]
+  ok  375 single-column stack (right below left)  [{"cols":"343px"}]
+  ok  375 workspace scrollable
+  ok  375 header capsule side margins  [16/16]
+  ok  375 title fits / truncates, no overflow  [{"t":false,"in":true}]
+  ok  375 icon buttons inside capsule  [[{"aria":"回到主站","w":36,"inside":true},{"aria":"清空对话","w":36,"inside":true}]]
+  ok  375 composer safe-area pb kept  [12px]
+  ok  375 composer visible  [793/812]
+  ok  375 send >= 44  [{"w":44,"h":44}]
+  shot 04-mobile-375.png
+
+RESULT: 100 passed / 0 failed

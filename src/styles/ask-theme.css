@@ -1,0 +1,288 @@
+/**
+ * M6 · AI 问答页主题（新建文件）
+ * 红线：index.css / tailwind.config.js 禁改 → /ask 的新视觉全部收敛在这里；
+ * 由 src/ask/AskPage.jsx 引入一次，覆盖 src/ask/* 全部子组件。
+ * 风格：暖纸面 + 樱花渐变 + 柔影细边（替代主站 2px 硬偏移贴纸阴影）+ 大留白。
+ * 零新依赖 · 纯 CSS · 尊重 prefers-reduced-motion。
+ */
+
+/* ============ 1. 暖纸面 + 樱花渐变背景 ============ */
+.ask-page {
+  isolation: isolate;
+  background: linear-gradient(180deg, #fff5f9 0%, #fdf7ff 52%, #f4f9ff 100%);
+}
+
+html.dark .ask-page {
+  background: linear-gradient(180deg, #241a33 0%, #1d1530 55%, #16101f 100%);
+}
+
+/* 极淡樱花光斑/粒子：纯 CSS 径向渐变，只做极慢漂移，不做重动画 */
+.ask-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 14% 20%, rgba(255, 176, 202, 0.35), transparent 26%),
+    radial-gradient(circle at 84% 6%, rgba(191, 219, 254, 0.32), transparent 28%),
+    radial-gradient(circle at 68% 94%, rgba(221, 213, 255, 0.34), transparent 30%),
+    radial-gradient(3px 3px at 26% 34%, rgba(255, 183, 205, 0.85), transparent 4px),
+    radial-gradient(2.5px 2.5px at 74% 26%, rgba(255, 205, 222, 0.8), transparent 4px),
+    radial-gradient(3px 3px at 44% 78%, rgba(203, 194, 255, 0.75), transparent 4px),
+    radial-gradient(2px 2px at 90% 62%, rgba(255, 214, 165, 0.7), transparent 3px);
+  animation: ask-drift 18s ease-in-out infinite alternate;
+}
+
+html.dark .ask-page::before {
+  opacity: 0.45;
+}
+
+@keyframes ask-drift {
+  from {
+    transform: translate3d(0, -8px, 0);
+  }
+  to {
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
+/* ============ 2. 柔影细边（投影语言：弥散软影 + 1px 细线） ============ */
+.ask-soft {
+  box-shadow:
+    0 8px 30px rgba(244, 114, 182, 0.12),
+    0 2px 8px rgba(75, 58, 85, 0.05);
+}
+
+.ask-soft-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ask-soft-hover:hover {
+  box-shadow:
+    0 14px 34px rgba(244, 114, 182, 0.2),
+    0 4px 10px rgba(75, 58, 85, 0.06);
+}
+
+html.dark .ask-soft {
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 玻璃面板：白/米白 72% + blur + 1px 细边（气泡、侧栏、空态、输入条通用） */
+.ask-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+html.dark .ask-panel {
+  background: rgba(44, 33, 64, 0.8);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ============ 3. 气泡 ============ */
+/* AI：米白玻璃底 + 柔影 + 1px 细边；overflow-wrap:anywhere 保证长 URL 必断不溢出 */
+.ask-bubble-ai {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 233, 241, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 8px 26px rgba(244, 114, 182, 0.12),
+    0 1px 3px rgba(75, 58, 85, 0.05);
+  overflow-wrap: anywhere;
+}
+
+html.dark .ask-bubble-ai {
+  background: rgba(44, 33, 64, 0.88);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+/* 用户：樱花渐变 + 白字 + 柔影 */
+.ask-bubble-me {
+  background: linear-gradient(135deg, #ff8fb1 0%, #ffb6cd 100%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  box-shadow:
+    0 8px 24px rgba(255, 143, 177, 0.3),
+    0 1px 3px rgba(217, 78, 127, 0.18);
+  overflow-wrap: anywhere;
+}
+
+html.dark .ask-bubble-me {
+  background: linear-gradient(135deg, #ff7aa6 0%, #ff9fc0 100%);
+}
+
+/* 头像圆底 */
+.ask-avatar {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 214, 228, 0.95);
+  box-shadow: 0 2px 8px rgba(244, 114, 182, 0.16);
+}
+
+html.dark .ask-avatar {
+  background: rgba(58, 43, 77, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============ 4. chips / 按钮 ============ */
+.ask-chip {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 214, 228, 0.95);
+  color: var(--food-text);
+  box-shadow: 0 2px 8px rgba(244, 114, 182, 0.1);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.ask-chip:hover {
+  transform: translateY(-2px);
+  color: var(--food-primary);
+  box-shadow: 0 8px 18px rgba(244, 114, 182, 0.18);
+}
+
+html.dark .ask-chip {
+  background: rgba(58, 43, 77, 0.85);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+/* 圆形渐变发送按钮 */
+.ask-send {
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff9fc0 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 107, 157, 0.34);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ask-send:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(255, 107, 157, 0.42);
+}
+
+.ask-send:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+/* ============ 5. 滚动条：隐藏原生（容器级统一） ============ */
+.ask-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ask-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* 自定义滚动条 thumb（div 模拟）；小屏（<1024px，与 lg 断点平齐）隐藏，
+   原生滚动条已被 .ask-scroll 隐藏 → 滚轮/触摸仍可滚（CustomScrollbar JS 零改动） */
+.ask-thumb {
+  display: none;
+  touch-action: none;
+  cursor: grab;
+  border-radius: 9999px;
+  background: rgba(255, 107, 157, 0.4);
+  transition: background-color 0.15s ease, width 0.15s ease;
+}
+
+@media (min-width: 1024px) {
+  .ask-thumb {
+    display: block;
+  }
+}
+
+.ask-thumb:hover {
+  background: rgba(255, 107, 157, 0.72);
+}
+
+.ask-thumb:active {
+  cursor: grabbing;
+}
+
+/* ============ 6. 焦点可达性（ask-* 类与 tailwind 工具类同特异性，靠后书写者胜，
+   故 focus 态在此显式声明，保证键盘焦点环不被柔影覆盖） ============ */
+.ask-soft:focus-visible,
+.ask-panel:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 157, 0.28),
+    0 8px 30px rgba(244, 114, 182, 0.12);
+  outline: none;
+}
+
+.ask-chip:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 157, 0.28),
+    0 8px 18px rgba(244, 114, 182, 0.18);
+  outline: none;
+}
+
+.ask-send:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 6px rgba(255, 107, 157, 0.4);
+}
+
+/* ============ 7. 输入条悬浮胶囊聚焦态 ============ */
+/* 胶囊外壳（.ask-composer-field）不接收焦点，光环由内层 textarea :focus-within 触发 */
+.ask-composer-field:focus-within {
+  border-color: #ffa8c6;
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 157, 0.18),
+    0 8px 30px rgba(244, 114, 182, 0.12),
+    0 2px 8px rgba(75, 58, 85, 0.05);
+}
+
+html.dark .ask-composer-field:focus-within {
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 157, 0.18),
+    0 8px 30px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ============ 8. 进场动效（错落 stagger / 卡片逐张淡入） ============ */
+@keyframes ask-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ask-enter {
+  animation: ask-pop 0.26s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.ask-card-enter {
+  animation: ask-pop 0.3s ease both;
+}
+
+/* ============ 9. reduced-motion 降级 ============ */
+@media (prefers-reduced-motion: reduce) {
+  .ask-page::before,
+  .ask-enter,
+  .ask-card-enter {
+    animation: none !important;
+  }
+
+  .ask-enter,
+  .ask-card-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .ask-chip:hover,
+  .ask-send:hover:not(:disabled) {
+    transform: none;
+  }
+}

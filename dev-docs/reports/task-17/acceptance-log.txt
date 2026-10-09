@@ -1,0 +1,122 @@
+# task-17 线上回归日志 · 2026-10-07T10:13:57.335Z
+# target=https://food-nav.shiora.cc/ · live=https://food-nav.shiora.cc · fv_id=6671a946-a3a3-4cea-a95c-8c2bb1fb2134
+
+  ok  probe 1 /api/health -> ok:true db:up
+  ok  probe 2 GET / -> 200 + Set-Cookie fv_id
+  ok  probe 3 GET /api/favorites -> 401 no_visitor
+  ok  probe 4 GET /api/stats/visits -> 401 (auth required)
+  ok  probe 5 POST /api/ai/chat -> 200 SSE (glm-4-flash)
+  ok  probe 6 GET /api/sites?status=active -> 200 envelope
+  ok  fresh fv_id cookie issued by middleware (live)
+  ok  no degraded banner on live home
+  ok  cards rendered == active API count (lazy load ok)
+  ok  API data marker: nav-cache written & fresh (M6)
+  ok  shot 01-live-home.png: pixel probe shows expected content
+  ok  baseline site stats captured
+  ok  heart click sends PUT /api/favorites/{id} (live)
+  ok  PUT carries X-Fav-Sign (32-hex)
+  ok  PUT body visitor_id === fv_id cookie
+  ok  PUT path is /api/favorites/{siteId}
+  ok  PUT -> 200 ok envelope
+  ok  aria-pressed flips to true
+  ok  favorite written to localStorage
+  ok  GET /api/favorites returns [{siteId,name}] with this site
+  ok  favorite +1 -> favorite_count+1 & heat_score+5 (live)
+  ok  no /api/track/favorite (防双计)
+  ok  favorite kept after refresh (local + server)
+  ok  server list still contains it after refresh
+  ok  shot 02-live-favorite-sync.png: pixel probe shows expected content
+  ok  unfavorite sends DELETE /api/favorites/{id}
+  ok  GET list empty after cancel
+  ok  unfavorite -> counts restored to baseline (不污染热度榜)
+  ok  degraded banner shows when /api blocked
+  ok  snapshot cards still rendered (no white screen)
+  ok  after unblock banner gone (cache/API back)
+  ok  workspace 樱见 renders (插画/问候/今日美味/最近会话)
+  ok  header has 回到主站 / 清空对话 icon buttons + 樱见 title
+  ok  header title centered (|Δ| ≤ 2px)
+  ok  recent-session panel shows empty-state guide (fresh)
+  ok  shot 03-live-ask-workspace.png: pixel probe shows expected content
+  ok  composer accepts question
+  ok  send button enabled & clicked
+  ok  streaming UI appears (停止 button)
+  ok  POST /api/ai/chat -> 200
+  ok  response is SSE (text/event-stream) from GLM
+  ok  GLM stream completes with non-empty answer
+  ok  pure chat state (no aside, single column)
+  ok  suggestion chips or recommend cards rendered
+  ok  memory session written (food-nav:ask-history)
+  ok  memory session restored after leaving & returning
+  ok  second stream starts (stop reachable)
+  ok  stop button aborts stream (已停止生成)
+  ok  清空对话 returns to workspace & clears history
+  ok  ?sort=heat returns heat desc list
+  ok  target heat site has a heart on main site
+  ok  target heart index found
+  ok  target favorite PUT sent
+  ok  target stats +1 / +5 before board read
+  ok  admin dashboard shows 站点热度榜 with rows
+  ok  board columns #/站点/分类/收藏/点击/热度
+  ok  board rows 1..10
+  ok  heat column highlighted (text-food-primary)
+  ok  board row reflects live favorite (+1/+5)
+  ok  board row0 matches live API top site
+  ok  shot 04-live-heat-board.png: pixel probe shows expected content
+  ok  dashboard 今日访问 UV present (daily_visits live)
+  ok  target favorite cancelled & stats restored
+  ok  tab 访问统计 clickable
+  ok  访问统计: UV cards + SVG trend chart
+  ok  今日 UV >= 1 (page visit counted)
+  ok  tab 检测中心 clickable
+  ok  检测中心 renders (链接存活检测 + 开始检测 + 日志区)
+  ok  check logs loaded from live D1 (rows > 0)
+  ok  tab 站点管理 clickable
+  ok  site table columns intact
+  ok  original tag captured (no pollution baseline)
+  ok  open edit form for target site
+  ok  edit form open (角标快捷打标 present)
+  ok  quick tag select set
+  ok  save clicked
+  ok  form closed after save
+  ok  tag applied via quick select (新品)
+  ok  reopen edit to restore tag
+  ok  edit form reopened
+  ok  restore value applied
+  ok  save (restore) clicked
+  ok  form closed after restore save
+  ok  tag restored to original (线上数据不污染)
+  ok  main site no horizontal overflow @375
+  ok  shot 05-live-mobile-375.png: pixel probe shows expected content
+  ok  ask workspace renders @375
+  ok  ask page no horizontal overflow @375
+  ok  admin board table container exists @375
+  ok  admin page no horizontal overflow @375
+  ok  dark mode toggles on (main)
+  ok  ask page dark tokens applied
+  ok  heat board token ok in dark mode
+  ok  shot 06-live-dark.png: pixel probe shows expected content
+  ok  theme restored to light
+  ok  final server favorites list empty
+  ok  card0 stats == baseline (restored)
+  ok  heat target stats == baseline (restored)
+  ok  ask-history + admin token cleared (local cleanup)
+
+# page visible + timers not throttled (IO 可用)
+# fv_id=6671a946-a3a3-4cea-a95c-8c2bb1fb2134
+# active sites (API) = 22
+# card0 = 下厨房
+# screenshot → 01-live-home.png
+# screenshot → 02-live-favorite-sync.png
+# screenshot → 03-live-ask-workspace.png
+# heat board target = 下厨房 (id 1)
+# admin logged in (live)
+# screenshot → 04-live-heat-board.png
+# admin token still valid (no login)
+# check center hint: 点击「开始检测」执行全量检测（单轮最多 10 站，自动分批跑完）
+# screenshot → 05-live-mobile-375.png
+# admin token still valid (no login)
+# admin token still valid (no login)
+# screenshot → 06-live-dark.png
+# final fv_id=6671a946-a3a3-4cea-a95c-8c2bb1fb2134
+
+RESULT: 99 passed / 0 failed

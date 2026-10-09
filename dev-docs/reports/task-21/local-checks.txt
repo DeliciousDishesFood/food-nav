@@ -1,0 +1,30 @@
+# task-21 · 本地验收日志 · 2026-10-08T15:02:50.503Z
+# pages dev http://127.0.0.1:8788（本地 D1 已执行 migration 006）
+
+[login] ok (token len=118)
+
+[snapshot] total=39 {"active":28,"checking":6,"broken":5}
+  ok  1. tinrry(8) 在库且 active + skipCheck=true + failCount=0
+  ok  1. id 9/10 已删除
+  ok  1. 29 美食天下已插入
+  ok  1. 30 好豆网已插入
+  ok  1. 新站未自动打标（tag 空）
+  ok  1. 所有站点 DTO 都带 skipCheck 布尔字段
+  ok  2. 单站检测 tinrry(8) → skipped:true
+       {"checked":0,"active":0,"broken":0,"checking":0,"errors":0,"total":0,"remaining":0,"elapsedMs":0,"batch":4,"results":[],"skipped":true,"skippedIds":[8]}
+  ok  3. 单站检测 美食天下(29) → active
+       code=200 HTTP 200 802ms
+  ok  3. 单站检测 好豆网(30) → active
+       code=200 HTTP 200 780ms
+  ok  4. 全量候选数 = 非豁免站数（豁免站被排除）
+  ok  4. 本轮结果不含豁免站 id 8
+       checked=10 total=38 remaining=28 active=9 checking=1 broken=0
+  ok  5. PUT skipCheck=false → DTO skipCheck=false
+  ok  5. PUT skipCheck=true 还原 → DTO skipCheck=true
+  ok  6. 新建站（未传 skipCheck）→ skipCheck=false
+  ok  6. 临时站已删除（清理）
+  ok  7. GET /api/sites（默认）只回 active（27 条）
+
+[snapshot.after] total=39 {"active":27,"checking":7,"broken":5}
+
+RESULT: 16 passed / 0 failed

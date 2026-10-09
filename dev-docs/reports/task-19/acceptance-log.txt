@@ -1,0 +1,79 @@
+task-19 · M10 CDP 验收日志
+base: http://127.0.0.1:8788
+time: 2026-10-07T15:33:05.896Z
+
+  ok  工作台渲染（h1 樱见 + composer）
+  ok  推荐提问: 发送按钮点击
+  ok  推荐提问: AI 流式回答完成
+  ok  推荐卡片渲染（主体 = 追问按钮）
+  ok  角落按钮：target=_blank + rel=noopener
+  ok  角落按钮：触控目标 ≥40×40
+  ok  角落按钮：aria-label=打开…站点
+  ok  卡片主体是 <button>（不再整卡外链）
+  ok  卡片主体 aria-label=关于…继续追问
+  ok  点击卡片主体
+  ok  对话流追加带站点上下文的追问消息
+  ok  追问问句与手输消息同构（用户气泡 +1）
+  ok  AI 流式回答该追问（复用发送链路）
+  ok  对话态 header 出现「返回工作台」
+  ok  生成结束后返回按钮可用
+  ok  点击返回工作台
+  ok  回到工作台（h1 樱见）
+  ok  对话流已退出
+  ok  会话进「最近会话」面板（localStorage sessions ≥1）
+  ok  返回后会话内容含站点追问消息
+  ok  面板出现该会话行（含删除按钮）
+  ok  点击「继续对话」恢复
+  ok  恢复的对话含追问问句（记忆链路正常）
+  ok  返回工作台（分离当前会话）
+  ok  第二会话: 发送按钮点击
+  ok  第二会话: AI 流式回答完成
+  ok  两条会话并存（面板 2 行 / storage 2 条）
+  ok  删除按钮触控目标 ≥40×40
+  ok  删一条 → 面板与 localStorage 同步（2→1）
+  ok  删空 → 面板空态引导
+  ok  删空 → localStorage 键移除
+  ok  clamp：刷新恢复会话后可返回工作台
+  ok  12 条注入 → 面板只显示 10 行（读取层截断）
+  ok  12 条注入 → 返回工作台 flush 后 storage 落 10 条
+  ok  clamp 场景可恢复会话
+  ok  写入路径同样 clamp 10
+  ok  主站路由外壳带 route-fade 动画
+  ok  动画时长 0.18s
+  ok  过渡不遮挡交互（pointer-events=auto）
+  ok  reduced-motion：路由动画关闭
+  ok  reduced-motion：不生成花瓣
+  ok  单击生成 3-5 片花瓣
+  ok  花瓣层 pointer-events:none + aria-hidden
+  ok  300ms 限频：同刻连点两次花瓣数不增加
+  ok  花瓣 ~1s 后消失并移除 DOM
+  ok  散花监听不拦截默认行为（入口点击正常跳转）
+  ok  暗色下 ask-panel 生效
+  ok  暗色下删除按钮有可见颜色
+  ok  375：整页无横向溢出（对话态）
+  ok  375：header 按钮组在视口内（返回主站|返回工作台 … |清空）
+  ok  375：返回工作台按钮可点（≥36×36，与既有 header 图标钮同规格）
+  ok  375：最近会话删除按钮 ≥40×40
+  ok  375：整页无横向溢出（工作台）
+  ok  主站渲染（问问樱见入口 + 导航按钮）
+  ok  主站外链结构仍在（a[target=_blank]）
+
+localStorage ask-history cleared
+推荐提问 回答开头: 推荐您几个烘焙网站：1. 君之烘焙：经典家庭烘焙博客，配方稳定靠谱，网址是https://www.junzhiblog.com/。2. 烘焙
+screenshot → 01-ask-recommend-ask.png
+追问回答开头: 「君之烘焙」是一个专注于家庭烘焙的博客，特色如下：
+
+1. 经验丰富的烘焙达人：博主君之拥有多年的烘焙经验，分享的烘焙技巧和配方都比较实用。
+screenshot → 02-ask-back-workspace.png
+第二会话 回答开头: 舒芙蕾塌的原因可能有很多，以下是一些常见的原因：
+
+1. 蛋白霜打过头：如果蛋白霜打得太发，可能会导致舒芙蕾的结构变得过于松散，容易塌陷。
+
+screenshot → 03a-ask-history-two-rows.png
+screenshot → 03-ask-history-delete.png
+screenshot → 05-sakura-burst.png
+screenshot → 06-dark.png
+375 对话态无推荐卡（恢复的会话无 sites）→ 桌面已断言按钮尺寸
+screenshot → 04-mobile-375.png
+
+RESULT: 55 passed / 0 failed

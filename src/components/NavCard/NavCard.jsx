@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { MorphIcon } from 'morphicons/react'
 import CoverPlaceholder from '../CoverPlaceholder.jsx'
 import { showToast } from '../../utils/toast.js'
@@ -8,6 +9,7 @@ import { copyText } from '../../utils/clipboard.js'
 export default function NavCard({ name, desc, url, icon, coverImg, tag }) {
   const favorites = useFavorites()
   const favorite = favorites.includes(name)
+  const [coverFailed, setCoverFailed] = useState(false)
 
   const handleFavorite = (event) => {
     event.preventDefault()
@@ -54,11 +56,12 @@ export default function NavCard({ name, desc, url, icon, coverImg, tag }) {
       </button>
 
       <div className="relative h-[120px] overflow-hidden rounded-media bg-food-tagBg ring-2 ring-food-ring md:h-[140px]">
-        {coverImg ? (
+        {coverImg && !coverFailed ? (
           <img
             src={coverImg}
             alt={`${name} 预览图`}
             loading="lazy"
+            onError={() => setCoverFailed(true)}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"
           />
         ) : (

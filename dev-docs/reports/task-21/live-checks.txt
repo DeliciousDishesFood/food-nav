@@ -1,0 +1,63 @@
+# task-21 · 线上 CDP 验收 + 截图 · 2026-10-08T15:45:56.987Z
+# https://food-nav.shiora.cc · CDP http://127.0.0.1:9222
+
+  ok  GET /api/sites?status=active = 27
+  ok  首页卡片渲染 == 27（27/27）
+  ok  首页含 Tinrry 甜悦家（豁免后恢复展示）
+  ok  首页含美食天下（新站 29）
+  ok  首页含好豆网（新站 30）
+  ok  首页不含已删真死链（甜品实验室/冰淇淋星球）
+  ok  无降级条（数据加载失败/本地快照）
+  ok  shot 02-home-27-sites.png: pixel probe
+  ok  375 无横向溢出
+  ok  shot 03-mobile-375.png: pixel probe
+  ok  admin 登录成功
+  ok  进入「站点管理」
+  ok  站点表 27 行 + 文案「共 27 个站点」
+  ok  Tinrry 行显示「豁免」徽标
+  ok  shot 01a-admin-skip-badge.png: pixel probe
+  ok  打开 Tinrry 编辑表单
+  ok  表单含「跳过自动检测」开关且已勾选回显
+  ok  开关说明文案含「cron / 手动全量 / 单站检测」
+  ok  shot 01-admin-skip-check.png: pixel probe
+  ok  点击豁免站「检测」→ 跳过提示文案
+  ok  新增站点表单含豁免开关且默认未勾选
+  ok  主站切换到暗色
+  ok  暗色下进入站点管理
+  ok  暗色下 admin 仍渲染豁免徽标
+  ok  shot 04-admin-dark-badge.png: pixel probe
+  ok  还原为亮色主题
+
+RESULT: 26 passed / 0 failed
+
+# notes
+page visible + timers not throttled
+  ·   SLOW net /api/sites?status=active&sort=manual 1343ms
+  ·   SLOW net /api/categories 1343ms
+  ·   SLOW net /api/favorites 1343ms
+  ·   NET FAIL https://quote.shiora.cc/api/hitokoto?type=a "net::ERR_FAILED" after 1527ms
+lazy render: pass1=27 · food-card nodes=27
+screenshot → 02-home-27-sites.png
+screenshot → 02-home-27-sites-full.png（整页 27 卡片证据图）
+lazy render: pass1=27 · food-card nodes=27
+screenshot → 03-mobile-375.png
+tinrry row: Tinrry 甜悦家cupcake烘焙甜点www.tinrry.com—2正常豁免最近 10-08 12:01检测编辑删除
+screenshot → 01a-admin-skip-badge.png
+screenshot → 01-admin-skip-check.png
+P5-notice poll 0.0s value=false probe=1ms
+  ·   SLOW net /api/check/run 812ms
+P5-notice poll ok after 0.9s (probe 1ms)
+P6-form poll ok after 0.0s (probe 1ms)
+P6 checkbox found after 0.0s
+  ·   SLOW net /api/sites?status=all 1344ms
+  ·   SLOW net /api/categories 3472ms
+  ·   NET FAIL https://quote.shiora.cc/api/hitokoto?type=a "net::ERR_FAILED" after 283ms
+  ·   SLOW net /api/sites?status=active&sort=manual 821ms
+  ·   SLOW net /api/favorites 822ms
+  ·   SLOW net /api/categories 822ms
+  ·   SLOW net /api/sites?status=all 756ms
+  ·   SLOW net /api/categories 5306ms
+  ·   SLOW net /api/sites?status=all 5307ms
+screenshot → 04-admin-dark-badge.png
+  ·   NET FAIL https://quote.shiora.cc/api/hitokoto?type=a "net::ERR_FAILED" after 282ms
+  ·   SLOW net /api/categories 837ms

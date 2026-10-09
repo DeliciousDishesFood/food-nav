@@ -1,0 +1,24 @@
+/**
+ * M10 · 路由切换轻淡入（新建文件：index.css 是红线禁改，动画独立成文件）
+ * 由 src/App.jsx 引入：路由容器 key={path} 变化时触发一次 180ms 淡入，
+ * 仅淡入（淡出从简）、不遮挡内容（animation 不延迟渲染）、不与 category-fade 叠加冲突
+ * （不同 class、不同层级：route-fade 在路由外壳，category-fade 在 HomePage 分组内）。
+ */
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.route-fade {
+  animation: route-fade-in 0.18s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-fade {
+    animation: none;
+  }
+}
