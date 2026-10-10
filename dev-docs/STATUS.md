@@ -1,14 +1,14 @@
 # STATUS · 项目状态交接（OpenCode 下次启动必读）
 
-> 更新：2026-10-10 · 副参谋（task-23 · 今日签 + AI 工作台极简 全绿，**纯前端、默认未部署**；线上版本不变 = M10 + M9-T3 + M9-T4）
-> 上一版：2026-10-09 task-22（M9 全关）
+> 更新：2026-10-11 · 副参谋（task-25 · 3D 月亮樱花树 + 签卡清理 全绿，**纯前端、默认未部署**；线上版本不变 = M10 + M9-T3 + M9-T4）
+> 上一版：2026-10-10 task-24（3D 樱花背景 + 签卡去摇签）
 > 本文件是 OpenCode 恢复上下文的第一入口。**任何新任务启动前先读本文件 + 对应任务文档**，不要在不知道项目状态的情况下动手。
 
 ---
 
 ## 一句话现状
 
-**线上版本 = M10 + M9-T3 + M9-T4**（2026-10-09 task-22，deployment `625437fb`）。**task-23（2026-10-10）已完成并全绿**：首页新增「今日签」贴纸卡（日期种子固定 + 摇签换签 + 站点直达）+ AI 樱见工作台极简化（删双静态面板、单列居中、最近会话收进 header History 图标浮层）→ lint 0/0 · verify **54/54**（52+2，零删除）· build ✓ · 本地 CDP 手动清单 **27/27** · 截图 4 张（`dev-docs/reports/task-23/`）。**待部署批次 = task-23（纯前端，由指挥官决定是否上线）**。
+**线上版本 = M10 + M9-T3 + M9-T4**（2026-10-09 task-22，deployment `625437fb`）。**task-25（2026-10-11）已完成并全绿**：① 今日签组件**整目录删除**（`src/components/DailyFortune/` + `HomePage` 挂载 + verify 断言，54 → **53**）② `Sakura3DBackground` 升级：花瓣改**两片 plane 90° 交叉的单 geometry**（8 顶点/12 索引，侧转有厚度）+ 右上**粉月亮**（SphereGeometry r0.8 + Canvas 径向渐变贴图 + BackSide 半透明 glow）+ 右下**低多边形樱花树**（Cylinder 树干 + 4 个 Icosahedron 树冠）+ **recycle 起点偏树 x** + 月亮/树参与视差（0.5×/0.3×，慢于花瓣）→ lint 0/0 · verify **53/53** · build ✓（three 仍独立 chunk）· 本地 CDP 手动清单 **22/22** · 截图 3 张（`dev-docs/reports/task-25/`）。**待部署批次 = task-23 + task-24 + task-25（纯前端，由指挥官决定是否上线）**。
 
 ## 当前里程碑状态
 
@@ -29,6 +29,32 @@
 | **M9-T3 检测豁免机制 + 死链治理**（`sites.skip_check` / pickTargets 三路径排除 / 单站 `{skipped}` 语义 / admin 开关+豁免徽标 / 删 id 9·10 + 插 id 29·30 / tinrry 豁免恢复） | ✅ 完成（单测 36/36 · 本地 16/16 · 线上 API 25/25 · CDP 26/26 · **已部署** 2026-10-08 task-21：migration 006 + cron `b80cb8d5` + Pages `c1bed251`），见 task-21 |
 | **M9-T4 收尾工程打包**（封面破图兜底 / 严格 404 catch-all / CHECK_TIMEOUT_MS 8s / D1 原子锁） | ✅ 完成（lint 0/0 · verify 52/52 · 本地锁并发 429 · 本地/线上全量 remaining=0 · CDP 截图 3+1 · **已部署** 2026-10-09 task-22：migration 007 + cron `79b39a46` + Pages `625437fb`），见 task-22。**M9 全部关闭** |
 | **task-23 今日签 + AI 工作台极简**（DailyFortune 日期种子签卡 + AskWorkspace 砍双面板单列居中 + AskHistoryMenu header 浮层恢复/单删） | ✅ 完成（lint 0/0 · verify **54/54** · 本地 CDP 27/27 · 截图 4 张 · **纯前端未部署** 2026-10-10），见 task-23 |
+| **task-24 3D 樱花背景 + 签卡去摇签**（DailyFortune 改纯静态删 fortune.css + 新增 Sakura3DBackground：three 懒加载独立 chunk、40/15 片花瓣 + 视差、z-0 不挡交互、降级兜底） | ✅ 完成（lint 0/0 · verify **54/54** 零改动 · build ✓ three 独立 chunk · 本地 CDP **22/22** · 截图 3 张 · **纯前端未部署** 2026-10-10），见 task-24 |
+| **task-25 3D 月亮樱花树 + 签卡清理**（签卡整目录删除 verify 54→53 + 花瓣改交叉单 geometry + 粉月亮/低多边形树/回收偏树/分层视差） | ✅ 完成（lint 0/0 · verify **53/53** · build ✓ three 独立 chunk · 本地 CDP **22/22** · 截图 3 张 · **纯前端未部署** 2026-10-11），见 task-25 |
+
+## 验证结果（2026-10-11 task-25 · 3D 月亮樱花树 + 签卡清理 · 已完成，默认不部署）
+
+- **改动（红线全绿）**：**删** `src/components/DailyFortune/`（整目录：`DailyFortune.jsx` + `fortune.css`，签卡连同摇签历史整体下线）· **改** `src/pages/HomePage.jsx`（仅删 import + `<DailyFortune groups={groups}/>` 挂载）· **改** `tests/verify.mjs`（**仅删 1 条断言** `home shows daily fortune card`，54 → **53**，其余零改动）· **重写** `src/components/effects/Sakura3DBackground.jsx`（505 行：`makeCrossGeometry()` 两片 PlaneGeometry 绕 Y 90° 交叉**合并成单个 geometry**（8 顶点/12 索引 → 单 draw、转视角有厚度）· `makeMoonTexture()` 256×128 Canvas **双心**径向渐变 `#fffdfb→#ffe9f1→#ffc2d6→#ff9ec2` 对准球面 u=0.25/v=0.5 并消 u=0/1 接缝 · `buildMoon()` SphereGeometry r0.8 + BackSide glow r1.18 opacity0.15 depthWrite:false · `buildTree()` Cylinder 树干 + 4 个 Icosahedron(detail0) 树冠 `#ffd9e6/#ffe2ec/#ffe6f0/#fff0f5` · `recycleX()` 回收重生 x = 树 x ±3 夹紧视口 · `applyDecorLayout()` <768px 位置 ×0.5 尺寸 ×0.7 · tick 内月亮 0.5× / 树 0.3× 同向视差（慢于花瓣）· 钩子扩 `moon/tree/scene/petals` · dispose 覆盖装饰层资源；`detectRuntime`/`await import('three')` 懒加载/visibility/resize/无 WebGL/reduced-motion 降级**原样保留**）
+- **红线**：`NavCard/**`、`Layout/**`、`MusicPlayer/**`、`TypeWriterQuote.tsx`、主站 `Header.jsx`、`src/ask/**` 零改动（git status 可证）；SakuraBurst 保留；`fixed inset-0 z-0 pointer-events-none` 规则不变；零新依赖
+- **命令基线**：lint **0/0** · verify **53/53**（签卡断言已删）· build ✓（`index-Z3jRo49_.js` 317.03kB/102.47kB gzip（task-24 315.63/102.01 → +1.40kB 为月亮/树/recycle）+ **`three.module-4gI5Z-_B.js` 736.58kB/186.86kB 独立 chunk**，>500kB 警告属预期）→ 输出存 `dev-docs/reports/task-25/{lint,verify,build}.txt`
+- **本地 CDP 手动验收 `t25-accept.mjs` → 22/22**（`accept-log.txt`）：10 项清单全覆盖 —— 月亮（SphereGeometry r0.8 + map + glow BackSide/透明/0.15/r1.18 + 位置右上 + NDC 视野内）· 树（children=5 Cylinder+4×Icosahedron、树冠 `geometry.index===null` 棱面、四色粉白、右下 NDC 在视野内）· 花瓣 8 顶点/12 索引交叉单 geometry + recycle 后 40 片 `|baseX−树x|≤3.05` 且 ≥10 片已重生 · 视差分层 Δcam≈0.56 > Δ月亮≈0.30 > Δ树≈0.18 > 0（X/Y 双向）· 签卡 DOM/目录/HomePage/verify 四重删除证据 · `elementFromPoint` 首卡/header/收藏心/搜索/问问樱见全命中自身子树且无一命中 layer + **实点收藏心 aria-pressed 翻转** · 暗色装饰层在跑 · 375px 15 瓣 + 装饰层 ×0.5/×0.7 且 NDC 在视野内 + 无横向溢出 · 收藏/主题/搜索/音乐/AI 页无回归（ask 页月亮树照常渲染在最底层）· reduced-motion 与无 WebGL（删 `WebGLRenderingContext` 注入）双降级 `return null` · **全程 0 未捕获异常**
+- **截图 3 张**（`dev-docs/reports/task-25/`）：`01-moon-tree-light`（右上粉月亮径向渐变 + 右下低多边形树 + 交叉花瓣）· `02-moon-tree-dark`（暗色均可见不突兀）· `03-mobile-375`（装饰层收缩、不挤内容）
+- **过程坑（详见 report §5）**：① **`MeshBasicMaterial` 不支持 `flatShading`**（只在 Phong/Standard 等材质上有该属性，传入触发 "is not a property" 告警并被忽略）→ 棱面观感来自 `IcosahedronGeometry` 自身非索引面法线（`PolyhedronGeometry` 内部 `computeVertexNormals()`），验收断言改查 `geometry.index === null`；② **月亮渐变半径对准半球投影**：半球在贴图上只覆盖约 ±0.25w×±0.42h，原 0.42w 时盘缘只走到渐变 6 成 → 扁平粉盘，改 0.28w 才有球感；任务卡示例色在亮色主题对比度不足，换更深的边缘色；③ **CDP `Page.reload` 恢复历史滚动位** → elementFromPoint 探针拿到滚动后坐标（卡片 y 513→162、问问樱见 y=-47 出屏）→ 探针/截图前 `scrollTo(0,0)` 并断言 `scrollY===0`；④ `elementFromPoint` 命中的可能是探针元素的**祖先**（卡片根 div 包住收藏心 SVG）→ 判定改为 `el.contains(hit) || hit.contains(el)`；⑤ `verify.mjs` 保留的 task-25 注释里仍写着 `.daily-fortune`，按类名正则匹配会误报 → 改按断言名匹配
+- **部署**：**默认不部署**（任务卡口径）。上线命令 `npm run build && npx wrangler pages deploy dist --project-name food-nav`（纯前端 + three 独立 chunk 一并上传；回滚回 `625437fb`）
+- **遗留**：无
+- **汇报全文**：`dev-docs/reports/task-25/report.md`
+
+## 验证结果（2026-10-10 task-24 · 3D 樱花背景 + 签卡去摇签 · 已完成，默认不部署）
+
+- **改动（红线全绿）**：**改** `src/components/DailyFortune/DailyFortune.jsx`（**去摇签**：删 SHAKE_MS/randomPick/rolled/shaking/rollCount/useEffect/useRef/onClick/onKeyDown/role/tabIndex/cursor-pointer/「摇一摇」提示/`key={rollCount}`；保留日期种子签文、`_blank noopener` 站点直达、4 模板池、极淡 hover）· **删** `src/components/DailyFortune/fortune.css`（摇晃 keyframe 全在，已无引用）· **新增** `src/components/effects/Sakura3DBackground.jsx`（320 行：`detectRuntime()` 惰性探测（无 WebGL / `prefers-reduced-motion` → `return null`，jsdom 同路径安全）→ effect 内 `await import('three')` 双层 try/catch 静默降级 → 40 片（<768px 15 片）`PlaneGeometry(0.12~0.2)` + `MeshBasicMaterial{0xffb6cd 系 4 色, opacity .65, DoubleSide, depthWrite:false}` + canvas 单瓣贴图 → 下落 0.3~0.8/s + 正弦风场 + x/z 翻转 + `y<-5` 回收 → mousemove 相机 ±0.3 lerp 视差 → visibilitychange 暂停 / resize 同步 / 卸载 dispose 全量 → `info.autoReset=false` + 钩子 `host.__sakura3d={camera,renderer,count,scene,petals}`；容器 `fixed inset-0 z-0 pointer-events-none aria-hidden`）· **改** `src/App.jsx`（仅新增 `<Sakura3DBackground />`，**渲染在 `.route-fade` 之前**；SakuraBurst 并列保留）· **+1 运行时依赖 `three@^0.186.1`**（任务卡核心要求，动态 import 不进首屏；STATUS 红线「运行时依赖不新增」按任务卡豁免）
+- **红线**：`NavCard/**`、`Layout/**`、`MusicPlayer/**`、`TypeWriterQuote.tsx`、主站 `Header.jsx` 零改动（git status 可证）；SakuraBurst 保留；ask 流式逐行未动；`index.css`/`tailwind.config.js` token 只复用；**`tests/verify.mjs` 零改动**
+- **命令基线**：lint **0/0** · verify **54/54**（签卡断言本就是存在性，无「点击换签」需改）· build ✓（`index-B1k8sDU0.js` 315.63kB/102.01kB gzip + **`three.module-4gI5Z-_B.js` 736.58kB/186.86kB 独立 chunk**；首屏 chunk 只含 3 个使用点，three 实现体全在独立 chunk；>500kB 警告属预期）→ 输出存 `dev-docs/reports/task-24/{lint,verify,build}.txt`
+- **本地 CDP 手动验收 `t24-accept.mjs` → 22/22**（`accept-log.txt`）：10 项清单全覆盖 —— 3D 层规格 `fixed/inset-0/z-0/pe:none` + scene 恰 40 瓣 + `tris=2×calls` + geo 随入画增长 + **three 按需懒加载（resource startTime ≥ navigation）** · 鼠标右上/左下 → 相机 `(±0.28, ±0.22)` 且 ≤0.31 · `elementFromPoint` 签卡/链接/header/收藏心/搜索/问问樱见全命中自身 + **实点收藏心 aria-pressed 翻转** · hidden 暂停 frame 不动 / 恢复递增 · 375px count=15 且无横向溢出 · 暗色 40 瓣帧在跑 · 签卡无 role/tabindex/onClick、**连点 3 次签文不变**、`_blank+noopener` 直达 · SakuraBurst `.sakura-petal≥3` z>0 · 主站收藏/主题/搜索/音乐 + `/ask` 输入框命中自身 · reduced-motion 组件 `return null`（无 layer/canvas）· **全程 0 未捕获异常**
+- **截图 3 张**（`dev-docs/reports/task-24/`）：`01-3d-sakura-light`（花瓣只在背景缝隙、星星共存在上层）· `02-3d-sakura-dark`（暗底清晰可见）· `03-ask-no-overlap`（AI 页无花瓣覆盖）
+- **过程坑（详见 report §5）**：① 「ask 页花瓣盖住 UI」风险 → **A/B 截图（有/无 3D 层）像素级一致** 证明 `.ask-page{isolation:isolate}` 自成上下文盖住 z-0 层，**零改动**；② 绘制量断言连修三轮：`geo` 因视锥剔除逐步增长（17→40）、每帧仅 20~25 瓣可见、以及 **three 对 `transparent+DoubleSide` 走双 pass 渲染**（`WebGLRenderer.js:2164` `forceSinglePass=false` → 每瓣 2 次 draw，用 `drawElements+modelViewMatrix` 探针证实）→ 最终 `scene.children===40 && tris===2×calls && calls≤2×count`；③ Edge 被遮挡 → `document.hidden=true` → rAF 停摆 frame 恒 0 → 脚本加 `setFocusEmulationEnabled`+`setWebLifecycleState` 护栏；④ wrangler 偶发慢 → `ensureSakura()` reload 重试 3 次
+- **部署**：**默认不部署**（任务卡口径）。上线命令 `npm run build && npx wrangler pages deploy dist --project-name food-nav`（纯前端 + three 独立 chunk 一并上传；回滚回 `625437fb`）
+- **遗留**：可选优化 `forceSinglePass:true` 可把绘制调用砍半（任务卡未要求，未做）；验收钩子含 `scene/petals` 只读引用，若不想暴露需同步回退清单 1/5 断言
+- **汇报全文**：`dev-docs/reports/task-24/report.md`
 
 ## 验证结果（2026-10-10 task-23 · 今日签 + AI 工作台极简 · 已完成，默认不部署）
 
@@ -174,7 +200,7 @@
 | D1 库 | `food-nav-db`，id `b3f7564d-03d5-4ce0-b3ff-a252878dac96`；远程迁移 **001+002+003+004+005+006+007 已全部执行**（007-check-lock 于 2026-10-09 执行 ×2 幂等确认） |
 | 生产 secrets | `ADMIN_PASSWORD` / `ADMIN_SECRET` / `GLM_API_KEY` / **`FAVORITE_SALT`** 均已 `wrangler pages secret put`（**值只在对话中传递，勿写入任何将提交的文件**；本地开发用 `functions/.dev.vars` 同步，已 .gitignore） |
 | cron Worker | `food-nav-link-check-cron`，`crons=["0 4 * * *"]`（**task-22 随 checker.js 改动重部署**，version `79b39a46-b8ee-45ad-bed6-dcc8104be605`；部署顺序必须 cron 先、Pages 后） |
-| **待部署** | **task-23（2026-10-10，纯前端）**：今日签 + 工作台极简，本地全绿（verify 54/54 · CDP 27/27），**等指挥官决定是否上线** → `npm run build && npx wrangler pages deploy dist --project-name food-nav`。线上当前版本 = **M10 + M9-T3 + M9-T4**，Pages deployment `625437fb.food-nav-5eb.pages.dev`（2026-10-09）。**回滚**：`npx wrangler pages deployment list --project-name food-nav` 回上一个 deployment → `c1bed251`（M9-T3）；再上 `42835c8a`（M10）。cron 可回 `b80cb8d5`；D1 007 为纯增量表可留不删 |
+| **待部署** | **task-23 + task-24 + task-25（2026-10-10/11，纯前端）**：今日签 + 工作台极简 + 3D 樱花背景（签卡去摇签）+ 3D 月亮樱花树（签卡整目录删除、verify 53），本地全绿（verify **53/53** · CDP 27/27 + 22/22 + 22/22），**等指挥官决定是否上线** → `npm run build && npx wrangler pages deploy dist --project-name food-nav`（会一并上传 `three.module-*.js` 独立 chunk 736kB / gzip 187kB，按需拉取不进首屏）。线上当前版本 = **M10 + M9-T3 + M9-T4**，Pages deployment `625437fb.food-nav-5eb.pages.dev`（2026-10-09）。**回滚**：`npx wrangler pages deployment list --project-name food-nav` 回上一个 deployment → `c1bed251`（M9-T3）；再上 `42835c8a`（M10）。cron 可回 `b80cb8d5`；D1 007 为纯增量表可留不删 |
 | 部署命令 | Pages：`npm run build && npx wrangler pages deploy dist --project-name food-nav`；cron：`npx wrangler deploy --config cron/wrangler.toml` |
 | Cloudflare 账号 | 67a7b579cd22f292b900fd445e139cf9 |
 
@@ -191,10 +217,10 @@
 
 ## 🚫 禁止改动红线（长期有效）
 
-1. 主站 UI/组件/交互零改动：`src/components/**`（**只允许新增文件**——MusicPlayer/PageDeco/effects 红线语义内已获准，不允许改现有文件）、`index.css`、`tailwind.config.js`
+1. 主站 UI/组件/交互零改动：`src/components/**`（**只允许新增文件**——MusicPlayer/PageDeco/effects 红线语义内已获准，不允许改现有文件；**任务卡明文点名的例外**：task-24 改写 `DailyFortune/DailyFortune.jsx` + 删 `DailyFortune/fortune.css`；task-25 **整目录删除** `DailyFortune/**`、重写 `effects/Sakura3DBackground.jsx`、改 `pages/HomePage.jsx` 摘挂载）、`index.css`、`tailwind.config.js`
 2. `src/data/navSources.js`：仅作 fallback 快照
-3. `tests/verify.mjs`：断言语义不可破坏（现 **54** 条，task-23 起 52+2）；演进需走任务卡审批
-4. 运行时依赖不新增（wrangler 仅 devDependency）
+3. `tests/verify.mjs`：断言语义不可破坏（现 **53** 条，task-23 起 52+2、task-25 删签卡 1 条 54→53）；演进需走任务卡审批
+4. 运行时依赖不新增（wrangler 仅 devDependency）；**例外：`three@^0.186.1`（task-24 任务卡核心要求，`await import('three')` 拆独立 chunk 不进首屏）**
 5. 生产 secrets 值禁止写入任何将提交 GitHub 的文件
 
 ## 已知遗留（写进后续任务卡）
@@ -210,8 +236,8 @@
 9. ~~**m3-api-tests 2 条期望过期**~~ → **task-18 已闭环**：由独立单测 `dev-docs/reports/task-18/t18-grade.mjs` 覆盖（**49/49**），无需再改历史脚本
 10. ~~**检测超时固定 5000ms**~~ → **task-22 已闭环**：`CHECK_TIMEOUT_MS=8000`（最坏 HEAD+GET 16s < timeBudget 18s），线上全量验证 remaining=0、无连续超时误判
 
-## 下一步（task-23 完成，等指挥官决策）
+## 下一步（task-23 + task-24 + task-25 完成，等指挥官决策）
 
-1. **task-23 部署决策**：今日签 + 工作台极简已全绿（纯前端），**默认不部署**；要上线执行 `npm run build && npx wrangler pages deploy dist --project-name food-nav`（cron/D1 零改动）。
+1. **task-23 / task-24 / task-25 部署决策**：三批纯前端改动已全绿，**默认不部署**；要上线执行 `npm run build && npx wrangler pages deploy dist --project-name food-nav`（cron/D1 零改动，会新增 `three.module-*.js` 静态资源）。
 2. **M10 后续候选**：热度衰减公式。细节与用户对齐后写任务卡。
 3. M9 已全部关闭（T1~T4，task-16~22）；线上 27 站全 active。

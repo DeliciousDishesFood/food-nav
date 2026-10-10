@@ -1,0 +1,30 @@
+﻿
+> food-nav@0.0.0 build
+> vite build
+
+[36mvite v8.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+鉁?1945 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                         1.98 kB 鈹?gzip:   1.06 kB
+dist/assets/AskPage-DPv-ZK8m.css        3.92 kB 鈹?gzip:   1.29 kB
+dist/assets/index-DKWbnBR1.css         35.07 kB 鈹?gzip:   7.82 kB
+dist/assets/AskPage-DGRvbfGy.js        28.01 kB 鈹?gzip:   8.99 kB
+dist/assets/AdminPage-DZCjlU0T.js      57.42 kB 鈹?gzip:  13.49 kB
+dist/assets/index-Z3jRo49_.js         317.03 kB 鈹?gzip: 102.47 kB
+dist/assets/three.module-4gI5Z-_B.js  736.58 kB 鈹?gzip: 186.86 kB
+
+[32m鉁?built in 872ms[39m
+node.exe : [33m[plugin builtin:vite-reporter] 
+所在位置 行:1 字符: 1
++ & "D:\node.js/node.exe" "D:\node.js/node_modules/npm/bin/npm-cli.js"  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33m[plugin builtin:vite-reporter] :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeS
+plitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m

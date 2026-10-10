@@ -730,8 +730,7 @@ const askEntry = qa('button').find((b) => (b.textContent || '').includes('问问
 // 新增断言 ①（47 → 49）：HomePage 出现「问问樱见」入口按钮（M8 品牌改名，语义不变）
 check('home shows ask entry button', Boolean(askEntry), 'entry button not found')
 
-// 新增断言 ①（task-23，52 → 53）：首页「今日签」贴纸卡（.daily-fortune 存在即成立）
-check('home shows daily fortune card', !!q('.daily-fortune'), 'daily fortune card not found')
+// 删除断言（task-25，54 → 53）：首页「今日签」贴纸卡 .daily-fortune（DailyFortune 组件整目录删除，Hero 区清空）
 
 if (askEntry) askEntry.click()
 // 懒加载 chunk：等待 /ask 渲染出提问输入框（动态 import 需 await）

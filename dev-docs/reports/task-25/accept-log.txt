@@ -1,0 +1,23 @@
+RESULT: 22 passed / 0 failed
+  ok  0 3D 樱花装饰层就绪（canvas + 渲染帧）
+  ok  5 签卡已删：DOM 无 .daily-fortune/无签文残留 + 目录整删 + HomePage 无挂载 + verify 断言已删
+  ok  1 月亮：球体 + 径向渐变贴图 + BackSide 半透明 glow + 位置右上 + 视野内
+  ok  1 3D 层规格（fixed/inset-0/z-0/pe:none + 40 瓣 + 42 scene 子级 + 动画在跑）
+  ok  1 three 按需懒加载（运行时才拉取 three.module-*.js）
+  ok  2 树：树干 Cylinder + 4 团 Icosahedron 棱面（非索引面法线） + 粉白配色 + 位置右下 + 视野内
+  ok  3 立体花瓣：单片 = 两片 plane 交叉（8 顶点 / 12 索引）+ 粉白半透明 DoubleSide
+  ok  3 recycle 起点偏树 x（重生花瓣 |x - 树x| ≤ 3.05 且至少 10 片已重生）
+  ok  4 视差分层：Δ相机 > Δ月亮 > Δ树 > 0（X/Y 双向，月亮 0.5×、树 0.3×）
+  ok  6 elementFromPoint：首卡 / 导航头 / 收藏心 / 搜索框 / AI 入口 命中自身（装饰层不吃命中）
+  ok  6 收藏心实点可交互（aria-pressed 翻转，层不挡点击）
+  ok  7 暗色：月亮/树/花瓣仍在运行（count=40、decor 在、帧在跑）
+  ok  7 暗色动画未停
+  ok  8 375px：15 瓣 + 月亮/树位置收缩(0.5×)尺寸缩小(0.7×)且仍在视野内 + 无横向溢出
+  ok  9 收藏 toggle 正常
+  ok  9 主题切换正常
+  ok  9 搜索过滤正常
+  ok  9 音乐播放器展开正常
+  ok  9 AI 页可达 + 输入框命中自身（装饰层不挡交互，月亮/树在 ask 页同样渲染在最底层）
+  ok  10 reduced-motion：无 3D 花瓣层（组件 return null），主站仍正常
+  ok  10 无 WebGL：组件 return null（无 layer/canvas），主站不白屏
+  ok  无未捕获页面异常

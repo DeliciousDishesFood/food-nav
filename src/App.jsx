@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import AdminFallback from './admin/AdminFallback.jsx'
 import SakuraBurst from './components/effects/SakuraBurst.jsx'
+import Sakura3DBackground from './components/effects/Sakura3DBackground.jsx'
 import { initFavoritesSync } from './hooks/useFavorites.js'
 import './styles/route-fade.css'
 
@@ -118,6 +119,9 @@ function App() {
 
   return (
     <>
+      {/* task-24 3D 樱花背景：必须排在 route-fade 之前 → 树序靠后
+          （PageDeco 星星 z-0 在其上、内容 z-10 在其上），视觉永远垫底且 pointer-events:none */}
+      <Sakura3DBackground />
       <div key={path} className="route-fade">
         {content}
       </div>

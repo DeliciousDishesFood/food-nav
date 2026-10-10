@@ -1,0 +1,23 @@
+RESULT: 22 passed / 0 failed
+  ok  0 3D 樱花层就绪（canvas + 渲染帧）
+  ok  1 3D 层就绪：fixed inset-0 z-0 pointer-events:none + canvas + 桌面 40 片
+  ok  1 每帧真实绘制（scene 恰 40 瓣、tris=2×calls、calls≤2×count 双面双 pass、geo≤40 随入画增长）且动画在跑
+  ok  1 three 按需懒加载（运行时才拉取 three.module-*.js）
+  ok  2 鼠标右上/左下 → 相机视差位移方向正确且在 ±0.3 内
+  ok  3 elementFromPoint：签卡 / 签卡链接 / 导航头 / 收藏心 / 搜索框 / AI 入口 命中自身（花瓣层不吃命中）
+  ok  3 收藏心实点可交互（aria-pressed 翻转，层不挡点击）
+  ok  4 切后台（hidden）动画暂停、切回恢复
+  ok  5 375px 花瓣降密度 15 片（count=15、scene=15、geo≤15、calls≤30）且无横向溢出
+  ok  6 暗色下 3D 层仍在运行（count=40、帧在跑）
+  ok  6 暗色动画未停
+  ok  7 签卡纯静态：无 role/tabindex/cursor-pointer/onClick、点击 3 次签文不变、无摇签动画
+  ok  7 站点名直达链接保留（_blank + noopener + http）
+  ok  7 签文命中每日推荐模板池
+  ok  8 SakuraBurst 点击溅花瓣仍在（≥3 片、pointer-events:none、z 高于 3D 层）
+  ok  9 收藏 toggle 正常
+  ok  9 主题切换正常
+  ok  9 搜索过滤正常
+  ok  9 音乐播放器展开正常
+  ok  9 AI 页可达 + 输入框 elementFromPoint 命中自身（花瓣层不挡交互）
+  ok  10 reduced-motion：无 3D 花瓣层（组件 return null），签卡仍正常
+  ok  无未捕获页面异常

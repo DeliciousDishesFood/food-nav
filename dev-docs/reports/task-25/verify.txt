@@ -1,0 +1,99 @@
+﻿
+> food-nav@0.0.0 verify
+> node tests/verify.mjs
+
+
+[1] first paint: lazy skeleton / typewriter / api
+  ok  active tab is all
+  ok  23 skeletons offscreen
+  ok  no real card yet
+[TypeWriterQuote] response锛?/quote-api/api/hitokoto?type=a 200 basic application/json
+[TypeWriterQuote] 鍙ュ瓙鑾峰彇鎴愬姛锛?/quote-api/api/hitokoto?type=a
+  ok  23 real cards after IO
+  ok  skeletons replaced
+  ok  typewriter grows per char
+  ok  quote api called with type=a
+  ok  dev uses same-origin vite proxy (CORS fix)
+  ok  remote anime quote typed out
+  ok  quote min-height placeholder
+  ok  quote text-sm + pink-500/80
+  ok  api data rendered from mock /api/
+  ok  nav cache written after api success
+
+[2] dark mode toggle
+  ok  theme toggle in header
+  ok  html.dark on
+  ok  theme saved to localStorage
+  ok  data-theme=dark
+  ok  toggle back to light
+  ok  dark kept for reload test
+
+[3] favorites: empty state / toggle / tab
+  ok  empty favorites shows EmptyTip
+  ok  category saved
+  ok  heart on every card
+  ok  favorite written to localStorage
+  ok  heart pressed state
+  ok  unfavorite removes entry
+  ok  favorites tab shows only 1 card
+
+[3B] M9 favorites server sync (PUT/DELETE) + click report (50 -> 52)
+  ok  favorites sync init calls GET /api/favorites
+  ok  favorite toggled via PUT/DELETE /api/favorites/{id} (real button click)
+  ok  favorite written to local storage alongside server sync
+  ok  click reported to /api/track/click
+
+[4] local fuzzy search
+  ok  search filters live
+  ok  no match renders EmptyTip
+  ok  clear restores all cards
+
+[5] category memory
+  ok  category written to localStorage
+  ok  baking tab shows 5 cards
+
+[6] copy link + toast
+  ok  copy button exists
+  ok  clipboard written
+  ok  success toast shown
+
+[7] reload keeps state
+  ok  storage round-trip reads favorites back
+[TypeWriterQuote] response锛?/quote-api/api/hitokoto?type=a 200 basic application/json
+[TypeWriterQuote] 鍙ュ瓙鑾峰彇鎴愬姛锛?/quote-api/api/hitokoto?type=a
+  ok  dark theme restored after reload
+  ok  category restored after reload
+  ok  favorites survive reload
+  ok  favorites tab after reload shows 1 card
+
+[8] 404 page
+  ok  unknown path renders 404
+  ok  back home button
+  ok  404 uses sticker card
+
+[9] api failure 鈫?local snapshot fallback (no white screen)
+[TypeWriterQuote] response锛?/quote-api/api/hitokoto?type=a 200 basic application/json
+[TypeWriterQuote] 鍙ュ瓙鑾峰彇鎴愬姛锛?/quote-api/api/hitokoto?type=a
+node.exe : [navApi] 鎺ュ彛涓嶅彲鐢紝涓荤珯浣跨敤 navSources 鏈湴蹇収
+所在位置 行:1 字符: 1
++ & "D:\node.js/node.exe" "D:\node.js/node_modules/npm/bin/npm-cli.js"  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([navApi] 鎺ュ彛涓嶅彲...vSources 鏈湴蹇収:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  ok  api failure falls back to snapshot (no white screen)
+
+[10] admin panel: #/admin route / login / sites data source
+  ok  /admin route renders login page
+  ok  login success renders admin shell + token saved
+  ok  admin sites list fetched from /api/sites?status=all
+
+[11] ask: home entry button + #/ask lazy route
+[TypeWriterQuote] response锛?/quote-api/api/hitokoto?type=a 200 basic application/json
+[TypeWriterQuote] 鍙ュ瓙鑾峰彇鎴愬姛锛?/quote-api/api/hitokoto?type=a
+  ok  home shows ask entry button
+  ok  /ask route renders composer
+  ok  ask header shows history button
+  streaming smoke: ok
+
+RESULT: 53 passed / 0 failed
